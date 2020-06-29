@@ -1,0 +1,23 @@
+Type: Compendium
+Package: paper-tsibbletalk
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Earo",
+           family = "Wang",
+           role = c("aut", "cre"),
+           email = "earo.wang@gmail.com")
+URL: https://github.com/earowang/paper-tsibbletalk/issues
+BugReports: https://github.com/earowang/paper-tsibbletalk/issues
+Depends:
+    R (>= 3.2),
+    tidyverse (>= 1.2.1)
+Imports:
+    bookdown (>= 0.9),
+    here,
+    knitr (>= 1.22),
+    MonashEBSTemplates (>= 0.2),
+    spelling (>= 2.1)
+Remotes:
+    robjhyndman/MonashEBSTemplates
+Encoding: UTF-8
+Language: en-GB

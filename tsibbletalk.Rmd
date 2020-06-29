@@ -1,0 +1,43 @@
+---
+title: "Conversations in time: interactive visualization to explore structured temporal data"
+author:
+- familyname: Wang
+  othernames: Earo
+  address: Department of Statistics, The Univeristy of Auckland, New Zealand
+  email: earo.wang@auckland.ac.nz
+  correspondingauthor: true
+- familyname: Cook
+  othernames: Dianne
+  address: Department of Econometrics and Business Statistics, Monash University, Australia
+  email: dicook@monash.edu
+abstract: "A brief summary of our ideas"
+keywords: ""
+blind: false
+toc: false
+bibliography: references.bib
+biblio-style: authoryear-comp
+output:
+  UOARmdTemplates::workingpaper:
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 8
+    includes:
+      in_header: preamble.tex
+    number_sections: yes
+    citation_package: biblatex
+    dev: "pdf"
+---
+
+```{r setup, echo = FALSE, cache = FALSE, include = FALSE}
+options("knitr.graphics.auto_pdf" = TRUE)
+library(knitr)
+opts_chunk$set(
+  echo = FALSE, warning = FALSE, message = FALSE, comment = "#>",
+  fig.path = 'figure/', fig.align = 'center', fig.show = 'hold',
+  cache = TRUE, cache.path = 'cache/',
+  out.width = ifelse(is_html_output(), "100%", "\\textwidth")
+)
+knitr::opts_knit$set(root.dir = here::here())
+```
+
+# Introduction
