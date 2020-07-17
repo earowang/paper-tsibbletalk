@@ -41,3 +41,6 @@ knitr::opts_knit$set(root.dir = here::here())
 ```
 
 # Introduction
+
+* a composition algebra to construct tree-structured linking views for nesting and crossing factors
+* projection: marking a single point of interest highlights all other points that share particular data values (connect-type)
