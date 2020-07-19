@@ -42,5 +42,39 @@ knitr::opts_knit$set(root.dir = here::here())
 
 # Introduction
 
-* a composition algebra to construct tree-structured linking views for nesting and crossing factors
-* projection: marking a single point of interest highlights all other points that share particular data values (connect-type)
+* An ensemble of graphics
+* Accelerate the exploratory data visualization process
+
+# Background
+
+## Interactive visualization systems with linking views
+
+* {ggobi} and {xggobi}
+* {cranvas} and {cranvastime}
+* [crossfilter.js](http://crossfilter.github.io/crossfilter/)
+* {crosstalk} and html widgets
+
+## Tidy temporal data and workflow
+
+* {tsibble}
+* and tsibble-centered workflow
+
+# Shared temporal data for coordinated views
+
+* Symbolic formula to express structural specifications among keyed units, using `/` and `*` from Wilkinson notation (10.2307/2346786) for nesting and crossing.
+* Nesting variables generate hierarchical tree, hence `plotly_key_tree()`. Overview and navigation made easier.
+* One-to-many linking: marking a single point of interest highlights all other points that share particular data values (connect-type)
+* Lists of key values, and json
+* R6 subclass of `SharedData` from {crosstalk}
+
+# Slicing and dicing time
+
+* Time wrapping: absolute time to relative time, grouped by corresponding lower-resolution time. date-times -> hours, by dates
+* Transform and send newly-transformed data via server, without updating anything else (e.g. layout and graphical elements), to avoid completely redrawing.
+* A shiny module: slider and plot
+
+# Case study: monthly domestic tourist trips in Australia
+
+# Conclusions and discussions
+
+# References {-}
