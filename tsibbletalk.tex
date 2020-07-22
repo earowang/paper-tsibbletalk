@@ -1,0 +1,132 @@
+% !TeX root = RJwrapper.tex
+\title{Conversations in time: interactive visualization to explore
+structured temporal data}
+\author{by Earo Wang, Dianne Cook}
+
+\maketitle
+
+\abstract{%
+An abstract of less than 150 words.
+}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+\begin{itemize}
+\tightlist
+\item
+  An ensemble of graphics
+\item
+  Accelerate the exploratory data visualization process
+\end{itemize}
+
+\hypertarget{background-and-motivation}{%
+\section{Background and motivation}\label{background-and-motivation}}
+
+\hypertarget{interactive-visualization-systems-with-linking-views}{%
+\subsection{Interactive visualization systems with linking
+views}\label{interactive-visualization-systems-with-linking-views}}
+
+\begin{itemize}
+\tightlist
+\item
+  \{ggobi\} and \{xggobi\}
+\item
+  \{cranvas\} and \{cranvastime\}
+\item
+  \href{http://crossfilter.github.io/crossfilter/}{crossfilter.js} \&
+  \href{https://dc-js.github.io/dc.js/}{dc.js}
+\item
+  \{crosstalk\} and html widgets
+\end{itemize}
+
+\hypertarget{tidy-temporal-data-and-workflow}{%
+\subsection{Tidy temporal data and
+workflow}\label{tidy-temporal-data-and-workflow}}
+
+The \CRANpkg{tsibble} package extends the \texttt{data.frame} and
+\CRANpkg{tibble} structure to represent temporal data in tidy format
+{[}cite{]}. A tsibble consists of \emph{index}, \emph{key}, and other
+measured variables in one data frame. The \emph{index} column holds
+time-based indices. The \emph{key} column(s) uniquely identifies a
+collection of related observational units during a period of time
+defined by \emph{index}. They are ``sticky'' columns to a
+\texttt{tsibble} over the course of transformation.
+
+The \CRANpkg{feasts} and \CRANpkg{fable} packages, part of the
+\textbf{tidyverts} suite, aim to make time series analysis easier. They
+provide analytical and forecasting tools for the tsibble data structure,
+generating tsibble-centered workflow. Functions, such as
+\texttt{features()} and \texttt{model()}, summarise a sequence of
+indexed values down to a single statistic or model by every
+observational unit. The output is a normal table, where each row
+corresponds to an observational unit denoted by ``key''. In the context
+of relational databases, the ``key'' acts like a foreign key in a
+reduced form of tsibble, while the index and key together operates like
+a primary key.
+
+At the early stage of exploratory temporal data analysis, time series
+plots and scatterplots goes hand by hand. (insert figures below)
+
+\hypertarget{shared-temporal-data-for-coordinated-views}{%
+\section{Shared temporal data for coordinated
+views}\label{shared-temporal-data-for-coordinated-views}}
+
+\begin{itemize}
+\tightlist
+\item
+  Symbolic formula to express structural specifications among keyed
+  units, using \texttt{/} and \texttt{*} from Wilkinson notation
+  (10.2307/2346786) for nesting and crossing.
+\item
+  Nesting variables generate hierarchical tree, hence
+  \texttt{plotly\_key\_tree()}. Overview and navigation made easier.
+\item
+  One-to-many linking: marking a single point of interest highlights all
+  other points that share particular data values (connect-type)
+\item
+  Lists of key values, and json
+\item
+  R6 subclass of \texttt{SharedData} from \{crosstalk\}
+\end{itemize}
+
+\hypertarget{slicing-and-dicing-time}{%
+\section{Slicing and dicing time}\label{slicing-and-dicing-time}}
+
+\begin{itemize}
+\tightlist
+\item
+  Time wrapping: absolute time to relative time, grouped by
+  corresponding lower-resolution time. date-times -\textgreater{} hours,
+  by dates
+\item
+  Transform and send newly-transformed data via server, without updating
+  anything else (e.g.~layout and graphical elements), to avoid
+  completely redrawing.
+\item
+  A shiny module: slider and plot
+\end{itemize}
+
+\hypertarget{case-study-monthly-domestic-tourist-trips-in-australia}{%
+\section{Case study: monthly domestic tourist trips in
+Australia}\label{case-study-monthly-domestic-tourist-trips-in-australia}}
+
+\hypertarget{conclusions-and-discussions}{%
+\section{Conclusions and
+discussions}\label{conclusions-and-discussions}}
+
+\bibliography{references.bib}
+
+\address{%
+Earo Wang\\
+The Univeristy of Auckland\\
+line 1\\ line 2\\
+}
+\href{mailto:earo.wang@auckland.ac.nz}{\nolinkurl{earo.wang@auckland.ac.nz}}
+
+\address{%
+Dianne Cook\\
+Monash Univeristy\\
+line 1\\ line 2\\
+}
+\href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}
