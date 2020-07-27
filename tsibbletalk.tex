@@ -93,12 +93,20 @@ views}\label{shared-temporal-data-for-coordinated-views}}
 \hypertarget{slicing-and-dicing-time}{%
 \section{Slicing and dicing time}\label{slicing-and-dicing-time}}
 
+The other critical aspect of a tsibble is ``index'', that provides
+foundational temporal context. A common tool in time series analytical
+toolkit is seasonal plots that lay time series not on the whole time
+scale, but on an origin-less relative time unit, such as
+\texttt{gg\_season()} in the \{feasts\} package. It helps to examine and
+emphasise periodic/aperiodic patterns, comparing to time series plots
+that primarily focus on trends. Standard seasonal plots break the
+overall time into two components: seasonal periods on the x-axis, and
+grouped by their corresponding lower-resolution time. For example,
+monthly data can be decomposed into months separated by years, and
+hourly data into hours grouped by days.
+
 \begin{itemize}
 \tightlist
-\item
-  Time wrapping: absolute time to relative time, grouped by
-  corresponding lower-resolution time. date-times -\textgreater{} hours,
-  by dates
 \item
   Transform and send newly-transformed data via server, without updating
   anything else (e.g.~layout and graphical elements), to avoid
@@ -120,13 +128,14 @@ discussions}\label{conclusions-and-discussions}}
 \address{%
 Earo Wang\\
 The Univeristy of Auckland\\
-line 1\\ line 2\\
+Department of Statistics\\ The Univeristy of Auckland\\ New Zealand\\
 }
 \href{mailto:earo.wang@auckland.ac.nz}{\nolinkurl{earo.wang@auckland.ac.nz}}
 
 \address{%
 Dianne Cook\\
 Monash Univeristy\\
-line 1\\ line 2\\
+Department of Econometrics and Business Statistics\\ Monash
+University\\ Australia\\
 }
 \href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}

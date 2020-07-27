@@ -4,14 +4,16 @@ author:
 - name: Earo Wang
   affiliation: The Univeristy of Auckland
   address:
-  - line 1
-  - line 2
+  - Department of Statistics
+  - The Univeristy of Auckland
+  - New Zealand
   email: earo.wang@auckland.ac.nz
 - name: Dianne Cook
   affiliation: Monash Univeristy
   address:
-  - line 1
-  - line 2
+  - Department of Econometrics and Business Statistics
+  - Monash University
+  - Australia
   email: dicook@monash.edu
 bibliography: references.bib
 abstract: >
@@ -65,7 +67,8 @@ At the early stage of exploratory temporal data analysis, time series plots and 
 
 # Slicing and dicing time
 
-* Time wrapping: absolute time to relative time, grouped by corresponding lower-resolution time. date-times -> hours, by dates
+The other critical aspect of a tsibble is "index", that provides foundational temporal context. A common tool in time series analytical toolkit is seasonal plots that lay time series not on the whole time scale, but on an origin-less relative time unit, such as `gg_season()` in the {feasts} package. It helps to examine and emphasise periodic/aperiodic patterns, comparing to time series plots that primarily focus on trends. Standard seasonal plots break the overall time into two components: seasonal periods on the x-axis, and grouped by their corresponding lower-resolution time. For example, monthly data can be decomposed into months separated by years, and hourly data into hours grouped by days.
+
 * Transform and send newly-transformed data via server, without updating anything else (e.g. layout and graphical elements), to avoid completely redrawing.
 * A shiny module: slider and plot
 
