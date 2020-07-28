@@ -123,15 +123,13 @@ elements (such as boxplots). But it assumes that tsibble's time index is
 plotted on the x-axis. The other mandatory argument is to specify the
 number of seasonal periods that requires shifting.
 
-\begin{itemize}
-\tightlist
-\item
-  Transform and send newly-transformed data via server, without updating
-  anything else (e.g.~layout and graphical elements), to avoid
-  completely redrawing. Performance.
-\item
-  Double dispatch
-\end{itemize}
+Transformed data generally requires redrawing the plot, and worsen the
+performance of shiny. This shiny module directly manipulate the
+underlying data with the \texttt{plotly.js} react method. Only
+transformed data is sent to the server side, while keeping the rest
+configuration unchanged (e.g.~layout and graphical elements), for the
+performance reason. Users will not experience an obvious delay when the
+slider input is changed.
 
 \hypertarget{case-study-monthly-domestic-tourist-trips-in-australia}{%
 \section{Case study: monthly domestic tourist trips in
