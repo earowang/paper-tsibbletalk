@@ -83,11 +83,14 @@ views}\label{shared-temporal-data-for-coordinated-views}}
   \texttt{plotly\_key\_tree()}. Overview and navigation made easier.
 \item
   One-to-many linking: marking a single point of interest highlights all
-  other points that share particular data values (connect-type)
+  other points that share particular data values (categorical linking)
 \item
   Lists of key values, and json
 \item
-  R6 subclass of \texttt{SharedData} from \{crosstalk\}
+  R6 subclass of mutaframes \texttt{SharedData} from \{crosstalk\} with
+  metadata attached
+\item
+  Self-linking: a single data source
 \end{itemize}
 
 \hypertarget{slicing-and-dicing-time}{%
@@ -110,7 +113,7 @@ browse through many possible periods. Interactivity ought to be enabled.
 
 The \{tsibbletalk\} package provides a pair of UI and server functions,
 as a shiny module, to help with finding interesting time slices in a
-shiny application. The pair, \texttt{tsibbleDiceUI()} and
+shiny application. The pair, decoupled to \texttt{tsibbleDiceUI()} and
 \texttt{tsibbleDiceServer()}, presents a clean interface and forms a
 resusable piece. Like all shiny modules, users should supply a unique
 session id. The UI function \texttt{tsibbleDiceUI()} shows a slider that
@@ -123,13 +126,14 @@ elements (such as boxplots). But it assumes that tsibble's time index is
 plotted on the x-axis. The other mandatory argument is to specify the
 number of seasonal periods that requires shifting.
 
-Transformed data generally requires redrawing the plot, and worsen the
-performance of shiny. This shiny module directly manipulate the
-underlying data with the \texttt{plotly.js} react method. Only
-transformed data is sent to the server side, while keeping the rest
-configuration unchanged (e.g.~layout and graphical elements), for the
-performance reason. Users will not experience an obvious delay when the
-slider input is changed.
+(Data flows) Transformed data generally requires redrawing the plot, and
+worsen the performance of shiny. The underlying tsibble data is called
+back and transformed in R. Using the \texttt{plotly.js} react method,
+only transformed data is sent to the server side, while keeping the rest
+configuration unchanged (e.g.~layout and graphical elements). It is
+performant, and users will not experience notable delay in response to
+the change in the slider input. Dissect time index, and propagate
+transformed data to shiny server.
 
 \hypertarget{case-study-monthly-domestic-tourist-trips-in-australia}{%
 \section{Case study: monthly domestic tourist trips in
