@@ -1,6 +1,6 @@
 % !TeX root = RJwrapper.tex
-\title{Conversations in time: interactive visualization to explore
-structured temporal data}
+\title{Conversations in time: interactive visualization to explore structured
+temporal data}
 \author{by Earo Wang, Dianne Cook}
 
 \maketitle
@@ -72,12 +72,24 @@ plots and scatterplots goes hand by hand. (insert figures below)
 \section{Shared temporal data for coordinated
 views}\label{shared-temporal-data-for-coordinated-views}}
 
+The \pkg{tsibbletalk} package, inspired by the \CRANpkg{crosstalk}
+package, introduces a shared tsibble data structure to enable reactivity
+for temporal data (i.e.~a \texttt{tsibble}). The
+\texttt{as\_shared\_tsibble()} function turns a tsibble to a mutable
+tsibble \texttt{SharedTsibbleData}, as an R6 subclass of
+\texttt{SharedData} from \{crosstalk\}. A \emph{tsibble} data object
+holds a set of interrelated series, identified by the ``key'', in a data
+frame. When the ``key'' includes more than two variables, there can
+exist intrinsic structures in all combinations of variables: either
+nesting or crossing. (Add an example here)
+
+The \texttt{spec} argument in the \texttt{as\_shared\_tsibble()}
+function takes a symbolic formula to allow users to specify structural
+combinations, using \texttt{/} and \texttt{*} adopted from Wilkinson
+notation (10.2307/2346786) for nesting and crossing respectively.
+
 \begin{itemize}
 \tightlist
-\item
-  Symbolic formula to express structural specifications among keyed
-  units, using \texttt{/} and \texttt{*} from Wilkinson notation
-  (10.2307/2346786) for nesting and crossing.
 \item
   Nesting variables generate hierarchical tree, hence
   \texttt{plotly\_key\_tree()}. Overview and navigation made easier.
@@ -86,9 +98,6 @@ views}\label{shared-temporal-data-for-coordinated-views}}
   other points that share particular data values (categorical linking)
 \item
   Lists of key values, and json
-\item
-  R6 subclass of mutaframes \texttt{SharedData} from \{crosstalk\} with
-  metadata attached
 \item
   Self-linking: a single data source
 \end{itemize}
@@ -155,7 +164,7 @@ Department of Statistics\\ The Univeristy of Auckland\\ New Zealand\\
 \address{%
 Dianne Cook\\
 Monash Univerisity\\
-Department of Econometrics and Business Statistics\\ Monash
-University\\ Australia\\
+Department of Econometrics and Business Statistics\\ Monash University\\ Australia\\
 }
 \href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}
+
