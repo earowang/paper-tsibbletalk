@@ -84,9 +84,14 @@ exist intrinsic structures in all combinations of variables: either
 nesting or crossing. (Add an example here)
 
 The \texttt{spec} argument in the \texttt{as\_shared\_tsibble()}
-function takes a symbolic formula to allow users to specify structural
+function takes a symbolic formula to allow users to specify structured
 combinations, using \texttt{/} and \texttt{*} adopted from Wilkinson
-notation (10.2307/2346786) for nesting and crossing respectively.
+notation (10.2307/2346786) for nesting and crossing expressions
+respectively. By default, the specification assumes crossing structure
+for all units.
+
+Specifying the structure is particularly useful when there's nesting
+structure in the data.
 
 \begin{itemize}
 \tightlist

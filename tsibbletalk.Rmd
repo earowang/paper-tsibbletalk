@@ -61,7 +61,9 @@ At the early stage of exploratory temporal data analysis, time series plots and 
 
 The \pkg{tsibbletalk} package, inspired by the \CRANpkg{crosstalk} package, introduces a shared tsibble data structure to enable reactivity for temporal data (i.e. a `tsibble`). The `as_shared_tsibble()` function turns a tsibble to a mutable tsibble `SharedTsibbleData`, as an R6 subclass of `SharedData` from {crosstalk}. A *tsibble* data object holds a set of interrelated series, identified by the "key", in a data frame. When the "key" includes more than two variables, there can exist intrinsic structures in all combinations of variables: either nesting or crossing. (Add an example here)
 
-The `spec` argument in the `as_shared_tsibble()` function takes a symbolic formula to allow users to specify structural combinations, using `/` and `*` adopted from Wilkinson notation (10.2307/2346786) for nesting and crossing respectively.
+The `spec` argument in the `as_shared_tsibble()` function takes a symbolic formula to allow users to specify structured combinations, using `/` and `*` adopted from Wilkinson notation (10.2307/2346786) for nesting and crossing expressions respectively. By default, the specification assumes crossing structure for all units.
+
+Specifying the structure is particularly useful when there's nesting structure in the data.
 
 * Nesting variables generate hierarchical tree, hence `plotly_key_tree()`. Overview and navigation made easier.
 * One-to-many linking: marking a single point of interest highlights all other points that share particular data values (categorical linking)
