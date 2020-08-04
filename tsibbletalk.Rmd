@@ -2,14 +2,14 @@
 title: "Conversations in time: interactive visualization to explore structured temporal data"
 author:
 - name: Earo Wang
-  affiliation: The Univeristy of Auckland
+  affiliation: The University of Auckland
   address:
   - Department of Statistics
   - The Univeristy of Auckland
   - New Zealand
   email: earo.wang@auckland.ac.nz
 - name: Dianne Cook
-  affiliation: Monash Univerisity
+  affiliation: Monash University
   address:
   - Department of Econometrics and Business Statistics
   - Monash University
