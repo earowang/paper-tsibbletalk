@@ -5,7 +5,7 @@ author:
   affiliation: The University of Auckland
   address:
   - Department of Statistics
-  - The Univeristy of Auckland
+  - The Univerisity of Auckland
   - New Zealand
   email: earo.wang@auckland.ac.nz
 - name: Dianne Cook
@@ -63,11 +63,12 @@ The \pkg{tsibbletalk} package, inspired by the \CRANpkg{crosstalk} package, intr
 
 The `spec` argument in the `as_shared_tsibble()` function takes a symbolic formula to allow users to specify structured combinations, using `/` and `*` adopted from Wilkinson notation (10.2307/2346786) for nesting and crossing expressions respectively. By default, the specification assumes crossing structure for all units.
 
-Specifying the structure is particularly useful when there's nesting structure in the data.
+Specifying the structure is particularly useful, when there's a hierarchical structure in the data. For such case, a new function `plotly_key_tree()` can help to visualise the "key" structure as a dendrogram, using plotly. This type of plot gives an overview of structured information in the data. Owing to its interactivity, each node in the tree plot is clickable and linked to other plots, and in turn the navigation at various levels is made easier.
 
-* Nesting variables generate hierarchical tree, hence `plotly_key_tree()`. Overview and navigation made easier.
+When the key structure involves crossing only, one-to-one linking is the default.
+
 * One-to-many linking: marking a single point of interest highlights all other points that share particular data values (categorical linking)
-* Lists of key values, and json
+* Constructing recursive lists. Lists of key values, and json
 * Self-linking: a single data source
 
 # Slicing and dicing time
