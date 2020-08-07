@@ -44,14 +44,39 @@ views}\label{interactive-visualization-systems-with-linking-views}}
 \subsection{Tidy temporal data and
 workflow}\label{tidy-temporal-data-and-workflow}}
 
-The \CRANpkg{tsibble} package extends the \texttt{data.frame} and
-\CRANpkg{tibble} structure to represent temporal data in tidy format
-{[}cite{]}. A tsibble consists of \emph{index}, \emph{key}, and other
-measured variables in one data frame. The \emph{index} column holds
-time-based indices. The \emph{key} column(s) uniquely identifies a
-collection of related observational units during a period of time
-defined by \emph{index}. They are ``sticky'' columns to a
-\texttt{tsibble} over the course of transformation.
+The \CRANpkg{tsibble} package \citep{wang2020tsibble} introduces a
+unified temporal data structure, referred to as a \texttt{tsibble}, to
+represent time series and longitudinal data in a tidy format
+\citep{wickham2014tidy}. That said, a \texttt{tsibble} extends the
+\texttt{data.frame} and \CRANpkg{tibble} class with temporally
+contextual metadata: \texttt{index} and \texttt{key}. The \texttt{index}
+declares a data column that holds time-related indices. The \texttt{key}
+identifies a collection of related series or panels observed over the
+\texttt{index}-defined period, which can contain multiple columns. Below
+displays the monthly Australian retail trade turnover data, available in
+the \CRANpkg{tsibbledata} package. The \texttt{Month} column holds
+year-months as \texttt{index}. The \texttt{State} together with
+\texttt{Industry} are the identifiers for these 152 series, highlighted
+as \texttt{key}. Note that the column \texttt{Series\ ID} could be an
+alternative option for setting up \texttt{key}, but \texttt{State} and
+\texttt{Industry} are informative. The \texttt{index} and \texttt{key}
+are ``sticky'' columns to a \texttt{tsibble}, forming critical pieces
+for fluent temporal data analysis.
+
+\begin{Schunk}
+\begin{Soutput}
+#> # A tsibble: 64,532 x 5 [1M]
+#> # Key:       State, Industry [152]
+#>   State                Industry                    `Series ID`    Month Turnover
+#>   <chr>                <chr>                       <chr>          <mth>    <dbl>
+#> 1 Australian Capital ~ Cafes, restaurants and cat~ A3349849A   1982 Apr      4.4
+#> 2 Australian Capital ~ Cafes, restaurants and cat~ A3349849A   1982 May      3.4
+#> 3 Australian Capital ~ Cafes, restaurants and cat~ A3349849A   1982 Jun      3.6
+#> 4 Australian Capital ~ Cafes, restaurants and cat~ A3349849A   1982 Jul      4  
+#> 5 Australian Capital ~ Cafes, restaurants and cat~ A3349849A   1982 Aug      3.6
+#> # ... with 64,527 more rows
+\end{Soutput}
+\end{Schunk}
 
 The \CRANpkg{feasts} and \CRANpkg{fable} packages, part of the
 \textbf{tidyverts} suite, aim to make time series analysis easier. They

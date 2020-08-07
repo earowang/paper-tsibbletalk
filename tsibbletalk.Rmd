@@ -51,7 +51,13 @@ knitr::opts_knit$set(root.dir = here::here())
 
 ## Tidy temporal data and workflow
 
-The \CRANpkg{tsibble} package extends the `data.frame` and \CRANpkg{tibble} structure to represent temporal data in tidy format [cite]. A tsibble consists of *index*, *key*, and other measured variables in one data frame. The *index* column holds time-based indices. The *key* column(s) uniquely identifies a collection of related observational units during a period of time defined by *index*. They are "sticky" columns to a `tsibble` over the course of transformation.
+The \CRANpkg{tsibble} package [@wang2020tsibble] introduces a unified temporal data structure, referred to as a `tsibble`, to represent time series and longitudinal data in a tidy format [@wickham2014tidy]. That said, a `tsibble` extends the `data.frame` and \CRANpkg{tibble} class with temporally contextual metadata: `index` and `key`. The `index` declares a data column that holds time-related indices. The `key` identifies a collection of related series or panels observed over the `index`-defined period, which can contain multiple columns. Below displays the monthly Australian retail trade turnover data, available in the \CRANpkg{tsibbledata} package. The `Month` column holds year-months as `index`. The `State` together with `Industry` are the identifiers for these 152 series, highlighted as `key`. Note that the column `Series ID` could be an alternative option for setting up `key`, but `State` and `Industry` are informative. The `index` and `key` are "sticky" columns to a `tsibble`, forming critical pieces for fluent temporal data analysis later.
+
+```{r, aus-retail}
+library(tsibble)
+library(tsibbledata)
+print(aus_retail, n = 5)
+```
 
 The \CRANpkg{feasts} and \CRANpkg{fable} packages, part of the **tidyverts** suite, aim to make time series analysis easier. They provide analytical and forecasting tools for the tsibble data structure, generating tsibble-centered workflow. Functions, such as `features()` and `model()`, summarise a sequence of indexed values down to a single statistic or model by every observational unit. The output is a normal table, where each row corresponds to an observational unit denoted by "key". In the context of relational databases, the "key" acts like a foreign key in a reduced form of tsibble, while the index and key together operates like a primary key.
 
