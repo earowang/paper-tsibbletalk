@@ -1,5 +1,5 @@
 % !TeX root = RJwrapper.tex
-\title{Conversations in time: interactive visualization to explore structured
+\title{Conversations in time: interactive visualisation to explore structured
 temporal data}
 \author{by Earo Wang, Dianne Cook}
 
@@ -23,9 +23,9 @@ An abstract of less than 150 words.
 \hypertarget{background-and-motivation}{%
 \section{Background and motivation}\label{background-and-motivation}}
 
-\hypertarget{interactive-visualization-systems-with-linking-views}{%
-\subsection{Interactive visualization systems with linking
-views}\label{interactive-visualization-systems-with-linking-views}}
+\hypertarget{interactive-visualisation-systems-with-linking-views}{%
+\subsection{Interactive visualisation systems with linking
+views}\label{interactive-visualisation-systems-with-linking-views}}
 
 \begin{itemize}
 \tightlist
@@ -59,9 +59,9 @@ year-months as \texttt{index}. The \texttt{State} together with
 \texttt{Industry} are the identifiers for these 152 series, highlighted
 as \texttt{key}. Note that the column \texttt{Series\ ID} could be an
 alternative option for setting up \texttt{key}, but \texttt{State} and
-\texttt{Industry} are informative. The \texttt{index} and \texttt{key}
-are ``sticky'' columns to a \texttt{tsibble}, forming critical pieces
-for fluent temporal data analysis.
+\texttt{Industry} are more readable and informative. The \texttt{index}
+and \texttt{key} are ``sticky'' columns to a \texttt{tsibble}, forming
+critical pieces for fluent temporal data analysis later.
 
 \begin{Schunk}
 \begin{Soutput}
@@ -78,17 +78,33 @@ for fluent temporal data analysis.
 \end{Soutput}
 \end{Schunk}
 
-The \CRANpkg{feasts} and \CRANpkg{fable} packages, part of the
-\textbf{tidyverts} suite, aim to make time series analysis easier. They
-provide analytical and forecasting tools for the tsibble data structure,
-generating tsibble-centered workflow. Functions, such as
-\texttt{features()} and \texttt{model()}, summarise a sequence of
-indexed values down to a single statistic or model by every
-observational unit. The output is a normal table, where each row
-corresponds to an observational unit denoted by ``key''. In the context
-of relational databases, the ``key'' acts like a foreign key in a
-reduced form of tsibble, while the index and key together operates like
-a primary key.
+In the spirit of tidy data to the \CRANpkg{tidyverse}
+\citep{Wickham2019}, the \textbf{tidyverts} suite features
+\texttt{tsibble} as the foundational data structure, to build a fluid
+and fluent pipeline for time series analysis. Besides \CRANpkg{tsibble},
+the \CRANpkg{feasts} and \CRANpkg{fable} packages fill the role of
+statistical analysis and forecasting in the \textbf{tidyverts}
+ecosystem. When time series analysis starts taking off, series of
+interests defined by \texttt{key} are likely to remain unchanged over
+the course of analysis. Functions, such as \texttt{features()} and
+\texttt{model()}, summarise a sequence of indexed values down to a
+single statistic or model by every observational unit. The output is a
+normal table, where each row corresponds to an observational unit
+denoted by ``key''. In the context of relational databases, the ``key''
+acts like a foreign key in a reduced form of tsibble, while the index
+and key together operates like a primary key. (tsibble-centered
+workflow)
+
+\begin{Schunk}
+\begin{figure}
+
+{\centering \includegraphics[width=\textwidth]{figure/highlight-retail-1} 
+
+}
+
+\caption[ToDo]{ToDo}\label{fig:highlight-retail}
+\end{figure}
+\end{Schunk}
 
 At the early stage of exploratory temporal data analysis, time series
 plots and scatterplots goes hand by hand. (insert figures below)
