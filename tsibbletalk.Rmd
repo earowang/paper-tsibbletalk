@@ -65,7 +65,7 @@ In the spirit of tidy data to the \CRANpkg{tidyverse} [@Wickham2019], the **tidy
 ```{r highlight-retail, fig.height = 3.3, fig.cap = "ToDo"}
 ```
 
-Figure \ref{fig:highlight-retail} highlights not only a series with strongest seasonality, but also a need to querying interesting series on the fly. The two plots are static, but can be considered as linked views via the common `key` variables between two tables. This motivates enabling interactivity of `tsibble` and `tsibble`-derived objects for exploratory data analysis in a lightning manner.
+Figure \ref{fig:highlight-retail} highlights not only a series with strongest seasonality, but also a need to querying interesting series on the fly. The two plots are static, but can be considered as linked views via the common `key` variables between two tables. This motivates enabling interactivity of `tsibble` and `tsibble`-derived objects for rapid exploratory data analysis.
 
 # Shared temporal data for coordinated views
 
