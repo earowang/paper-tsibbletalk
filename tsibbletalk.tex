@@ -1,6 +1,6 @@
 % !TeX root = RJwrapper.tex
-\title{Conversations in time: interactive visualisation to explore structured
-temporal data}
+\title{Conversations in time: interactive visualisation to explore
+structured temporal data}
 \author{by Earo Wang, Dianne Cook}
 
 \maketitle
@@ -114,10 +114,14 @@ series, thus graphically displayed as Figure \ref{fig:highlight-retail}
 
 Figure \ref{fig:highlight-retail} highlights not only a series with
 strongest seasonality, but also a need to querying interesting series on
-the fly. The two plots are static, but can be considered as linked views
-via the common \texttt{key} variables between two tables. This motivates
-enabling interactivity of \texttt{tsibble} and \texttt{tsibble}-derived
-objects for rapid exploratory data analysis.
+the go. Without interactivity, one needs to first filter the interesting
+series out from the features table, and join back to the original
+\texttt{tsibble} in order to examine its trend in relation to others.
+This procedure can soon grow cumbersome if many series to be discovered.
+Despite that the two plots are static, they can be considered as linked
+views via the common \texttt{key} variables between two tables. This
+motivates enabling interactivity of \texttt{tsibble} and
+\texttt{tsibble}-derived objects for rapid exploratory data analysis.
 
 \hypertarget{shared-temporal-data-for-coordinated-views}{%
 \section{Shared temporal data for coordinated
@@ -228,7 +232,7 @@ Department of Statistics\\ The Univerisity of Auckland\\ New Zealand\\
 \address{%
 Dianne Cook\\
 Monash University\\
-Department of Econometrics and Business Statistics\\ Monash University\\ Australia\\
+Department of Econometrics and Business Statistics\\ Monash
+University\\ Australia\\
 }
 \href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}
-
