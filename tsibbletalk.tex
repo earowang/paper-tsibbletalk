@@ -20,12 +20,9 @@ An abstract of less than 150 words.
   Accelerate the exploratory data visualization process
 \end{itemize}
 
-\hypertarget{background-and-motivation}{%
-\section{Background and motivation}\label{background-and-motivation}}
-
-\hypertarget{interactive-visualisation-systems-with-linking-views}{%
-\subsection{Interactive visualisation systems with linking
-views}\label{interactive-visualisation-systems-with-linking-views}}
+\hypertarget{related-works-interactive-visualisation-systems-with-linking-views}{%
+\section{Related works: interactive visualisation systems with linking
+views}\label{related-works-interactive-visualisation-systems-with-linking-views}}
 
 \begin{itemize}
 \tightlist
@@ -40,9 +37,9 @@ views}\label{interactive-visualisation-systems-with-linking-views}}
   \{crosstalk\} and html widgets
 \end{itemize}
 
-\hypertarget{tidy-temporal-data-and-workflow}{%
-\subsection{Tidy temporal data and
-workflow}\label{tidy-temporal-data-and-workflow}}
+\hypertarget{motivation-tidy-temporal-data-and-workflow}{%
+\section{Motivation: tidy temporal data and
+workflow}\label{motivation-tidy-temporal-data-and-workflow}}
 
 The \CRANpkg{tsibble} package \citep{wang2020tsibble} introduces a
 unified temporal data structure, referred to as a \texttt{tsibble}, to
@@ -124,33 +121,46 @@ two tables. This motivates enabling interactivity of \texttt{tsibble}
 and \texttt{tsibble}-derived objects for rapid exploratory data
 analysis.
 
-\hypertarget{shared-temporal-data-for-coordinated-views}{%
-\section{Shared temporal data for coordinated
-views}\label{shared-temporal-data-for-coordinated-views}}
+\hypertarget{shared-temporal-data-for-coordinated-views-with-examples}{%
+\section{Shared temporal data for coordinated views with
+examples}\label{shared-temporal-data-for-coordinated-views-with-examples}}
 
 The \CRANpkg{tsibbletalk} package, inspired by the \CRANpkg{crosstalk}
 package, introduces a shared tsibble data structure on top of a
 \texttt{tsibble} to allow for frictionless communication between
 different plots for temporal data. The \texttt{as\_shared\_tsibble()}
-function provides an entry point in the flow, turning a \texttt{tsibble}
-to a shared data object (i.e.~\texttt{SharedTsibbleData} subclassing of
-\texttt{SharedData} from \CRANpkg{crosstalk}) that powers data
-transmission between plots. The \CRANpkg{tsibbletalk} package aims to
-streamline interactive graphical analysis with the focus of temporal and
-structured linking.
+function provides an entry point in the integrated flow, turning a
+\texttt{tsibble} to a shared instance (i.e.~\texttt{SharedTsibbleData}
+subclassing of \texttt{SharedData} from \CRANpkg{crosstalk}) that powers
+data transmission across multiple views. The \CRANpkg{tsibbletalk}
+package aims to streamline interactive graphical analysis with the focus
+of temporal and structured linking.
 
 As opposed to one-to-one linking, \CRANpkg{tsibbletalk} defaults to
 categorical linking where marking one or more observations in one
 category will broadcast to all other observations in this category.
 Given time series plots, click any data point on a line, highlighting
 the whole line as a result. The \texttt{as\_shared\_tsibble()} uses
-\texttt{tsibble}'s \texttt{key} data values to facilitate such linking.
-The \texttt{spec} argument in the \texttt{as\_shared\_tsibble()}
-function takes a symbolic formula to allow users to specify structured
-combinations, using \texttt{/} and \texttt{*} adopted from Wilkinson
-notation (10.2307/2346786) for nesting and crossing expressions
-respectively. By default, the specification assumes crossing structure
-for all units.
+\texttt{tsibble}'s \texttt{key} variables to achieve these types of
+linking, and the \texttt{spec} argument takes one step further in
+constructing hybrid linking, such as hierarchical and categorical
+linking. For example, each series in the \texttt{aus\_retail} data
+corresponds to all possible combinations of the \texttt{State} and
+\texttt{Industry} variables. They are intrinsically crossed with each
+other. If one variable is nested within another, this lends itself to a
+hierarchical structure, like geographical hierarchy. Such collection of
+inter-related time series are referred to as hierarchical and grouped
+time series in the literature \citep{fpp}.
+
+To incorporate structured specifications in the \texttt{key}, a symbolic
+formula can be passed to the \texttt{spec} argument. Adopting Wilkinson
+notations for factorial models \citep{Wilkinson1973}, the \texttt{spec}
+follows the \texttt{/} and \texttt{*} operators tradition to declare
+nesting and crossing variables respectively. The \texttt{spec} for the
+\texttt{aus\_retail} data is therefore specified as
+\texttt{spec\ =\ State\ *\ Industry}, which is the default for the
+presence of multiple \texttt{key} variables. Using \texttt{/} indicates
+if there is a hierarchy in the data. \texttt{tourism\_monthly}
 
 Specifying the structure is particularly useful, when there's a
 hierarchical structure in the data. For such case, a new function
@@ -168,8 +178,9 @@ turn the navigation at various levels is made easier.
   Self-linking: a single data source
 \end{itemize}
 
-\hypertarget{slicing-and-dicing-time}{%
-\section{Slicing and dicing time}\label{slicing-and-dicing-time}}
+\hypertarget{slicing-and-dicing-time-with-examples}{%
+\section{Slicing and dicing time with
+examples}\label{slicing-and-dicing-time-with-examples}}
 
 The other critical aspect of a tsibble is ``index'', that provides
 foundational temporal context. A common tool in time series analytical
@@ -209,10 +220,6 @@ configuration unchanged (e.g.~layout and graphical elements). It is
 performant, and users will not experience notable delay in response to
 the change in the slider input. Dissect time index, and propagate
 transformed data to shiny server.
-
-\hypertarget{case-study-monthly-domestic-tourist-trips-in-australia}{%
-\section{Case study: monthly domestic tourist trips in
-Australia}\label{case-study-monthly-domestic-tourist-trips-in-australia}}
 
 \hypertarget{conclusions-and-discussions}{%
 \section{Conclusions and
