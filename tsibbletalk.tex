@@ -20,26 +20,9 @@ An abstract of less than 150 words.
   Accelerate the exploratory data visualization process
 \end{itemize}
 
-\hypertarget{related-works-interactive-visualisation-systems-with-linking-views}{%
-\section{Related works: interactive visualisation systems with linking
-views}\label{related-works-interactive-visualisation-systems-with-linking-views}}
-
-\begin{itemize}
-\tightlist
-\item
-  \{ggobi\} and \{xggobi\}
-\item
-  \{cranvas\} and \{cranvastime\}
-\item
-  \href{http://crossfilter.github.io/crossfilter/}{crossfilter.js} \&
-  \href{https://dc-js.github.io/dc.js/}{dc.js}
-\item
-  \{crosstalk\} and html widgets
-\end{itemize}
-
-\hypertarget{motivation-tidy-temporal-data-and-workflow}{%
-\section{Motivation: tidy temporal data and
-workflow}\label{motivation-tidy-temporal-data-and-workflow}}
+\hypertarget{background-tidy-temporal-data-and-workflow}{%
+\section{Background: tidy temporal data and
+workflow}\label{background-tidy-temporal-data-and-workflow}}
 
 The \CRANpkg{tsibble} package \citep{wang2020tsibble} introduces a
 unified temporal data structure, referred to as a \texttt{tsibble}, to
@@ -121,9 +104,25 @@ two tables. This motivates enabling interactivity of \texttt{tsibble}
 and \texttt{tsibble}-derived objects for rapid exploratory data
 analysis.
 
-\hypertarget{shared-temporal-data-for-coordinated-views-with-examples}{%
-\section{Shared temporal data for coordinated views with
-examples}\label{shared-temporal-data-for-coordinated-views-with-examples}}
+\hypertarget{overview-of-interactivity}{%
+\section{Overview of interactivity}\label{overview-of-interactivity}}
+
+\begin{itemize}
+\tightlist
+\item
+  \{cranvas\} and \{cranvastime\}
+\item
+  \href{http://crossfilter.github.io/crossfilter/}{crossfilter.js} \&
+  \href{https://dc-js.github.io/dc.js/}{dc.js}
+\item
+  \{crosstalk\} and html widgets
+\item
+  \{rJava\}, \{rbokeh\} \{loon\}
+\end{itemize}
+
+\hypertarget{interactivity-for-coordinated-views-via-shared-temporal-data}{%
+\section{Interactivity for coordinated views via shared temporal
+data}\label{interactivity-for-coordinated-views-via-shared-temporal-data}}
 
 The \CRANpkg{tsibbletalk} package, inspired by the \CRANpkg{crosstalk}
 package, introduces a shared tsibble data structure on top of a
@@ -178,9 +177,8 @@ turn the navigation at various levels is made easier.
   Self-linking: a single data source
 \end{itemize}
 
-\hypertarget{slicing-and-dicing-time-with-examples}{%
-\section{Slicing and dicing time with
-examples}\label{slicing-and-dicing-time-with-examples}}
+\hypertarget{slicing-and-dicing-time}{%
+\section{Slicing and dicing time}\label{slicing-and-dicing-time}}
 
 The other critical aspect of a tsibble is ``index'', that provides
 foundational temporal context. A common tool in time series analytical

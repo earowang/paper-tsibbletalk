@@ -44,28 +44,30 @@ read_chunk("scripts/demo.R")
 * An ensemble of graphics
 * Accelerate the exploratory data visualization process
 
-# Related works: interactive visualisation systems with linking views
-
-* {ggobi} and {xggobi}
-* {cranvas} and {cranvastime}
-* [crossfilter.js](http://crossfilter.github.io/crossfilter/) & [dc.js](https://dc-js.github.io/dc.js/)
-* {crosstalk} and html widgets
-
-# Motivation: tidy temporal data and workflow
+# Background: tidy temporal data and workflow
 
 The \CRANpkg{tsibble} package [@wang2020tsibble] introduces a unified temporal data structure, referred to as a `tsibble`, to represent time series and longitudinal data in a tidy format [@wickham2014tidy]. That said, a `tsibble` extends the `data.frame` and \CRANpkg{tibble} class with temporally contextual metadata: `index` and `key`. The `index` declares a data column that holds time-related indices. The `key` identifies a collection of related series or panels observed over the `index`-defined period, which can comprise multiple columns. Below displays the monthly Australian retail trade turnover data (`aus_retail`), available in the \CRANpkg{tsibbledata} package. The `Month` column holds year-months as `index`. The `State` together with `Industry` are the identifiers for these 152 series, highlighted as `key`. Note that the column `Series ID` could be an alternative option for setting up `key`, but `State` and `Industry` are more readable and informative. The `index` and `key` are "sticky" columns to a `tsibble`, forming critical pieces for fluent temporal data analysis later.
 
 ```{r, print-retail}
 ```
 
-In the spirit of tidy data to the \CRANpkg{tidyverse} [@Wickham2019], the **tidyverts** suite features `tsibble` as the foundational data structure, in order to build a fluid and fluent pipeline for time series analysis. Besides \CRANpkg{tsibble}, the \CRANpkg{feasts} and \CRANpkg{fable} packages fill the role of statistical analysis and forecasting in the **tidyverts** ecosystem. When time series analysis starts taking off, series of interest denoted by the `key` variables often remain unchanged over the course of analysis, from trend inspection to forecasting performance. Figure \ref{fig:highlight-retail} (a) gives an overview of 152 series for the retail data using an overlaid time series plot, while Figure \ref{fig:highlight-retail} (b) presents a scatterplot, where each series is represented by a dot in the feature space (trend versus seasonal strength). The plot making of Figure \ref{fig:highlight-retail} (b) is aided with the `features()` function from \CRANpkg{feasts}, which summarises original data by each series down to various statistical features. This function along with other **tidyverts** functions is `tsibble`-aware, and outputs a table in a reduced form where each row corresponds to a series, thus graphically displayed as Figure \ref{fig:highlight-retail} (b).
+In the spirit of tidy data to the \CRANpkg{tidyverse} [@Wickham2019], the **tidyverts** suite features `tsibble` as the foundational data structure, in order to build a fluid and fluent pipeline for time series analysis. Besides \CRANpkg{tsibble}, the \CRANpkg{feasts} and \CRANpkg{fable} packages fill the role of statistical analysis and forecasting in the **tidyverts** ecosystem. When time series analysis starts taking off, series of interest denoted by the `key` variables often remain unchanged over the course of analysis, from trend inspection to forecasting performance.
+
+Figure \ref{fig:highlight-retail} (a) gives an overview of 152 series for the retail data using an overlaid time series plot, while Figure \ref{fig:highlight-retail} (b) presents a scatterplot, where each series is represented by a dot in the feature space (trend versus seasonal strength). The plot making of Figure \ref{fig:highlight-retail} (b) is aided with the `features()` function from \CRANpkg{feasts}, which summarises original data by each series down to various statistical features. This function along with other **tidyverts** functions is `tsibble`-aware, and outputs a table in a reduced form where each row corresponds to a series, thus graphically displayed as Figure \ref{fig:highlight-retail} (b).
 
 ```{r highlight-retail, fig.height = 3.3, fig.cap = "ToDo"}
 ```
 
 Figure \ref{fig:highlight-retail} highlights not only a series with strongest seasonality, but also a need to querying interesting series on the fly. Without interactivity, one needs to first filter the interesting series out from the features table, and join back to the original `tsibble` in order to examine its trend in relation to others. This procedure can soon grow cumbersome if many series to be discovered. Despite that the two plots are static, they can be considered as linked views via the common `key` variables between two tables. This motivates enabling interactivity of `tsibble` and `tsibble`-derived objects for rapid exploratory data analysis.
 
-# Shared temporal data for coordinated views with examples
+# Overview of interactivity
+
+* {cranvas} and {cranvastime}
+* [crossfilter.js](http://crossfilter.github.io/crossfilter/) & [dc.js](https://dc-js.github.io/dc.js/)
+* {crosstalk} and html widgets
+* {rJava}, {rbokeh} {loon}
+
+# Interactivity for coordinated views via shared temporal data
 
 The \CRANpkg{tsibbletalk} package, inspired by the \CRANpkg{crosstalk} package, introduces a shared tsibble data structure on top of a `tsibble` to allow for frictionless communication between different plots for temporal data. The `as_shared_tsibble()` function provides an entry point in the integrated flow, turning a `tsibble` to a shared instance (i.e. `SharedTsibbleData` subclassing of `SharedData` from \CRANpkg{crosstalk}) that powers data transmission across multiple views. The \CRANpkg{tsibbletalk} package aims to streamline interactive graphical analysis with the focus of temporal and structured linking.
 
@@ -78,7 +80,7 @@ Specifying the structure is particularly useful, when there's a hierarchical str
 * Constructing recursive lists. Lists of key values, and json
 * Self-linking: a single data source
 
-# Slicing and dicing time with examples
+# Slicing and dicing time
 
 The other critical aspect of a tsibble is "index", that provides foundational temporal context. A common tool in time series analytical toolkit is seasonal plots that lay time series not on the whole time scale, but on an origin-less relative time unit, for example `gg_season()` in the {feasts} package. It helps to examine and emphasise periodic/aperiodic patterns, comparing to time series plots that primarily focus on trends. Standard seasonal plots break the overall time into two components: seasonal periods on the x-axis, and grouped by their corresponding lower-resolution time. For example, monthly data can be decomposed into months separated by years, and hourly data into hours grouped by days. Data collected at lower-level resolutions often exhibits more than one seasonal patterns. To discover typical seasonal or non-typical profiles, it is helpful to quickly browse through many possible periods. Interactivity ought to be enabled.
 
