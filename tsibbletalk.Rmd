@@ -5,7 +5,7 @@ author:
   affiliation: The University of Auckland
   address:
   - Department of Statistics
-  - The Univerisity of Auckland
+  - The University of Auckland
   - New Zealand
   email: earo.wang@auckland.ac.nz
 - name: Dianne Cook
