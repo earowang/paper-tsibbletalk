@@ -34,6 +34,7 @@ opts_chunk$set(
 )
 opts_knit$set(root.dir = here::here())
 read_chunk("scripts/demo.R")
+read_chunk("scripts/tourism.R")
 ```
 
 ```{r, load-pkgs}
@@ -73,12 +74,25 @@ The \CRANpkg{tsibbletalk} package, inspired by the \CRANpkg{crosstalk} package, 
 
 As opposed to one-to-one linking, \CRANpkg{tsibbletalk} defaults to categorical linking where marking one or more observations in one category will broadcast to all other observations in this category. Given time series plots, click any data point on a line, highlighting the whole line as a result. The `as_shared_tsibble()` uses `tsibble`'s `key` variables to achieve these types of linking, and the `spec` argument takes one step further in constructing hybrid linking, such as hierarchical and categorical linking. For example, each series in the `aus_retail` data corresponds to all possible combinations of the `State` and `Industry` variables. They are intrinsically crossed with each other. If one variable is nested within another, this lends itself to a hierarchical structure, like geographical hierarchy. Such collection of inter-related time series are referred to as hierarchical and grouped time series in the literature [@fpp].
 
-To incorporate structured specifications in the `key`, a symbolic formula can be passed to the `spec` argument. Adopting Wilkinson notations for factorial models [@Wilkinson1973], the `spec` follows the `/` and `*` operators tradition to declare nesting and crossing variables respectively. The `spec` for the `aus_retail` data is therefore specified as `spec = State * Industry`, which is the default for the presence of multiple `key` variables. Using `/` indicates if there is a hierarchy in the data. `tourism_monthly`
+To incorporate structured specifications in the `key`, a symbolic formula can be passed to the `spec` argument. Adopting Wilkinson notations for factorial models [@Wilkinson1973], the `spec` follows the `/` and `*` operators tradition to declare nesting and crossing variables respectively. The `spec` for the `aus_retail` data is therefore specified as `State * Industry` or `Industry * State`, which is the default for the presence of multiple `key` variables. If there is a hierarchy in the data, using `/` is required to indicate the parent-child relation, as strictly one direction `parent/child`.
 
-Specifying the structure is particularly useful, when there's a hierarchical structure in the data. For such case, a new function `plotly_key_tree()` can help to visualise the "key" structure as a dendrogram, using plotly. This type of plot gives an overview of structured information in the data. Owing to its interactivity, each node in the tree plot is clickable and linked to other plots, and in turn the navigation at various levels is made easier.
+The `tourism_monthly` dataset packaged in \CRANpkg{tsibbletalk}, contains monthly domestic overnight trips across Australia, to give an illustrator of nesting and crossing. The `key` is comprised of three identifying variables: `State`, `Region`, and `Purpose` (of trip), in particular `State` nesting of `Region`, together crossed with `Purpose`. This specification can be translated as follows:
 
-* Constructing recursive lists. Lists of key values, and json
-* Self-linking: a single data source
+```{r tourism-shared, echo = TRUE}
+```
+
+```{r load-other-pkgs}
+```
+
+This dataset contains a three-level hierarchy: the root node is implicitly Australia, and geographically disaggregated to states and lower-level tourism regions. A new function `plotly_key_tree()` has been implemented to address the need of hierarchical discovery arising from data. It visually interprets hierarchies in the shared tsibble's `spec` as a tree view, made with \CRANpkg{plotly}. From a static point of view, a tree visualisation of hierarchical data facilitates to grasp the overview structure. From the interactive perspective, selecting a parent node along the tree subsequently triggers its children and their corresponding series, or vice versa. It makes navigation simpler than conditional panels, and also enables persistent brushing for comparisons across groups.
+
+```{r tourism-linking}
+include_graphics("img/tourism-linking.png")
+```
+
+
+```{r plotly-key-tree, eval = FALSE}
+```
 
 # Slicing and dicing time
 

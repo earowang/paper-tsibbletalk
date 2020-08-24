@@ -68,18 +68,19 @@ fill the role of statistical analysis and forecasting in the
 \textbf{tidyverts} ecosystem. When time series analysis starts taking
 off, series of interest denoted by the \texttt{key} variables often
 remain unchanged over the course of analysis, from trend inspection to
-forecasting performance. Figure \ref{fig:highlight-retail} (a) gives an
-overview of 152 series for the retail data using an overlaid time series
-plot, while Figure \ref{fig:highlight-retail} (b) presents a
-scatterplot, where each series is represented by a dot in the feature
-space (trend versus seasonal strength). The plot making of Figure
-\ref{fig:highlight-retail} (b) is aided with the \texttt{features()}
-function from \CRANpkg{feasts}, which summarises original data by each
-series down to various statistical features. This function along with
-other \textbf{tidyverts} functions is \texttt{tsibble}-aware, and
-outputs a table in a reduced form where each row corresponds to a
-series, thus graphically displayed as Figure \ref{fig:highlight-retail}
-(b).
+forecasting performance.
+
+Figure \ref{fig:highlight-retail} (a) gives an overview of 152 series
+for the retail data using an overlaid time series plot, while Figure
+\ref{fig:highlight-retail} (b) presents a scatterplot, where each series
+is represented by a dot in the feature space (trend versus seasonal
+strength). The plot making of Figure \ref{fig:highlight-retail} (b) is
+aided with the \texttt{features()} function from \CRANpkg{feasts}, which
+summarises original data by each series down to various statistical
+features. This function along with other \textbf{tidyverts} functions is
+\texttt{tsibble}-aware, and outputs a table in a reduced form where each
+row corresponds to a series, thus graphically displayed as Figure
+\ref{fig:highlight-retail} (b).
 
 \begin{Schunk}
 \begin{figure}
@@ -157,25 +158,46 @@ notations for factorial models \citep{Wilkinson1973}, the \texttt{spec}
 follows the \texttt{/} and \texttt{*} operators tradition to declare
 nesting and crossing variables respectively. The \texttt{spec} for the
 \texttt{aus\_retail} data is therefore specified as
-\texttt{spec\ =\ State\ *\ Industry}, which is the default for the
-presence of multiple \texttt{key} variables. Using \texttt{/} indicates
-if there is a hierarchy in the data. \texttt{tourism\_monthly}
+\texttt{State\ *\ Industry} or \texttt{Industry\ *\ State}, which is the
+default for the presence of multiple \texttt{key} variables. If there is
+a hierarchy in the data, using \texttt{/} is required to indicate the
+parent-child relation, as strictly one direction \texttt{parent/child}.
 
-Specifying the structure is particularly useful, when there's a
-hierarchical structure in the data. For such case, a new function
-\texttt{plotly\_key\_tree()} can help to visualise the ``key'' structure
-as a dendrogram, using plotly. This type of plot gives an overview of
-structured information in the data. Owing to its interactivity, each
-node in the tree plot is clickable and linked to other plots, and in
-turn the navigation at various levels is made easier.
+The \texttt{tourism\_monthly} dataset packaged in \CRANpkg{tsibbletalk},
+contains monthly domestic overnight trips across Australia, to give an
+illustrator of nesting and crossing. The \texttt{key} is comprised of
+three identifying variables: \texttt{State}, \texttt{Region}, and
+\texttt{Purpose} (of trip), in particular \texttt{State} nesting of
+\texttt{Region}, together crossed with \texttt{Purpose}. This
+specification can be translated as follows:
 
-\begin{itemize}
-\tightlist
-\item
-  Constructing recursive lists. Lists of key values, and json
-\item
-  Self-linking: a single data source
-\end{itemize}
+\begin{Schunk}
+\begin{Sinput}
+library(tsibbletalk)
+tourism_shared <- tourism_monthly %>% 
+  as_shared_tsibble(spec = (State / Region) * Purpose)
+\end{Sinput}
+\end{Schunk}
+
+This dataset contains a three-level hierarchy: the root node is
+implicitly Australia, and geographically disaggregated to states and
+lower-level tourism regions. A new function \texttt{plotly\_key\_tree()}
+has been implemented to address the need of hierarchical discovery
+arising from data. It visually interprets hierarchies in the shared
+tsibble's \texttt{spec} as a tree view, made with \CRANpkg{plotly}. From
+a static point of view, a tree visualisation of hierarchical data
+facilitates to grasp the overview structure. From the interactive
+perspective, selecting a parent node along the tree subsequently
+triggers its children and their corresponding series, or vice versa. It
+makes navigation simpler than conditional panels, and also enables
+persistent brushing for comparisons across groups.
+
+\begin{Schunk}
+
+
+\begin{center}\includegraphics[width=\textwidth]{img/tourism-linking} \end{center}
+
+\end{Schunk}
 
 \hypertarget{slicing-and-dicing-time}{%
 \section{Slicing and dicing time}\label{slicing-and-dicing-time}}
@@ -228,7 +250,7 @@ discussions}\label{conclusions-and-discussions}}
 \address{%
 Earo Wang\\
 The University of Auckland\\
-Department of Statistics\\ The Univerisity of Auckland\\ New Zealand\\
+Department of Statistics\\ The University of Auckland\\ New Zealand\\
 }
 \href{mailto:earo.wang@auckland.ac.nz}{\nolinkurl{earo.wang@auckland.ac.nz}}
 
