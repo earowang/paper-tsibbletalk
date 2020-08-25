@@ -84,14 +84,18 @@ The `tourism_monthly` dataset packaged in \CRANpkg{tsibbletalk}, contains monthl
 ```{r load-other-pkgs}
 ```
 
-This dataset contains a three-level hierarchy: the root node is implicitly Australia, and geographically disaggregated to states and lower-level tourism regions. A new function `plotly_key_tree()` has been implemented to address the need of hierarchical discovery arising from data. It visually interprets hierarchies in the shared tsibble's `spec` as a tree view, made with \CRANpkg{plotly}. From a static point of view, a tree visualisation of hierarchical data facilitates to grasp the overview structure. From the interactive perspective, selecting a parent node along the tree subsequently triggers its children and their corresponding series, or vice versa. It makes navigation simpler than conditional panels, and also enables persistent brushing for comparisons across groups.
+This dataset contains a three-level hierarchy: the root node is implicitly Australia, and geographically disaggregated to states and lower-level tourism regions. A new handy function `plotly_key_tree()` has been implemented to address the need of hierarchical discovery arising from the data. It visually interprets hierarchies in the shared tsibble's `spec` as a tree view, made with \CRANpkg{plotly}. The following code line produces the linked tree diagram and fills the left panel of Figure \ref{fig:tourism-linking-fig}.
 
-```{r tourism-linking}
+```{r plotly-key-tree, echo = TRUE}
+```
+
+The visual of tree hierarchy untangles a group of related series and snapshots the data organisation from a bird's eye view. It is accompanied with other two plots to compose an ensemble of coordinated graphics for multi-facetted exploration, shown as Figure \ref{fig:tourism-linking-fig}. The time series and scatter plots of Figure \ref{fig:tourism-linking-fig} are the interactive realisation of Figure \ref{fig:highlight-retail}. Since all plots are derived from one shared tsibble data source, they are self-linking multiple views. For example, selecting the leaf node "Melbourne" fires up four respective series of the `Purpose` category in other subplots, characterising "categorical linking". Press the "Shift" key to switch on persistent selection and simultaneously select the parent node "Western Australia" to trigger its children. The domestic tourism performance in Melbourne can be quickly compared against the whole state of Western Australia. It makes navigation simpler than conditional panels, and also enables persistent selection for comparisons across groups.
+
+```{r tourism-linking-fig, fig.cap = "ToDo"}
 include_graphics("img/tourism-linking.png")
 ```
 
-
-```{r plotly-key-tree, eval = FALSE}
+```{r tourism-linking, eval = FALSE}
 ```
 
 # Slicing and dicing time
