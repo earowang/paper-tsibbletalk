@@ -12,18 +12,21 @@ library(tsibble)
 ## ---- plotly-key-tree
 p_l <- plotly_key_tree(tourism_shared, height = 1100, width = 800)
 
-## ---- tourism-linking
-tourism_feat <- tourism_shared %>%
-  features(Trips, feat_stl)
+## ---- tourism-series
 p_tr <- tourism_shared %>%
   ggplot(aes(x = Month, y = Trips)) +
   geom_line(aes(group = Region), alpha = .5, size = .4) +
   facet_wrap(~ Purpose, scales = "free_y") +
   scale_x_yearmonth(date_breaks = "5 years", date_labels = "%Y")
+
+## ---- tourism-scatter
+tourism_feat <- tourism_shared %>%
+  features(Trips, feat_stl)
 p_br <- tourism_feat %>%
   ggplot(aes(x = trend_strength, y = seasonal_strength_year)) +
   geom_point(aes(group = Region))
 
+## ---- tourism-multi
 subplot(p_l,
   subplot(
     ggplotly(p_tr, tooltip = "Region", width = 1100),
