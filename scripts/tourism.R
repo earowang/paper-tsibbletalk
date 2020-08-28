@@ -24,7 +24,7 @@ tourism_feat <- tourism_shared %>%
   features(Trips, feat_stl)
 p_br <- tourism_feat %>%
   ggplot(aes(x = trend_strength, y = seasonal_strength_year)) +
-  geom_point(aes(group = Region))
+  geom_point(aes(group = Region), alpha = .8, size = 2)
 
 ## ---- tourism-multi
 subplot(p_l,

@@ -1,7 +1,7 @@
 % !TeX root = RJwrapper.tex
 \title{Conversations in time: interactive visualisation to explore
 structured temporal data}
-\author{by Earo Wang, Dianne Cook}
+\author{by Earo Wang and Dianne Cook}
 
 \maketitle
 
@@ -179,6 +179,17 @@ tourism_shared <- tourism_monthly %>%
 \end{Sinput}
 \end{Schunk}
 
+\begin{Schunk}
+\begin{figure}
+
+{\centering \includegraphics[width=\textwidth]{img/tourism-linking} 
+
+}
+
+\caption[ToDo]{ToDo}\label{fig:tourism-linking-fig}
+\end{figure}
+\end{Schunk}
+
 This dataset contains a three-level hierarchy: the root node is
 implicitly Australia, and geographically disaggregated to states and
 lower-level tourism regions. A new handy function
@@ -224,7 +235,7 @@ tourism_feat <- tourism_shared %>%
   features(Trips, feat_stl)
 p_br <- tourism_feat %>%
   ggplot(aes(x = trend_strength, y = seasonal_strength_year)) +
-  geom_point(aes(group = Region))
+  geom_point(aes(group = Region), alpha = .8, size = 2)
 \end{Sinput}
 \end{Schunk}
 
@@ -232,7 +243,7 @@ Lastly, three graphics are composed as an ensemble of coordinated views
 for multi-facetted exploration, shown as Figure
 \ref{fig:tourism-linking-fig} (the interactive realisation of Figure
 \ref{fig:highlight-retail}). Routine functions bring about new
-interaction with temporal data on the client side (i.e.~without Shiny).
+interaction with temporal data on the client side.
 
 \begin{Schunk}
 \begin{Sinput}
@@ -247,27 +258,30 @@ subplot(p_l,
 \end{Schunk}
 
 Since all plots are stemmed from one shared tsibble data source, they
-are self-linking views. Nodes, lines, and points are clickable. For
-example, selecting the leaf node ``Melbourne'' fires up four respective
-series of the \texttt{Purpose} category in other subplots, characterised
-by ``categorical linking''. Press the ``Shift'' key to switch on
-persistent selection, and simultaneously select the parent node
-``Western Australia'' to trigger its children. The domestic tourism
-performance in Melbourne can be quickly compared against the whole state
-of Western Australia. It makes navigation simpler than conditional
-panels, and also enables persistent selection for comparisons across
-groups.
+are self-linking views. Nodes, lines, and points are hoverable and
+clickable. Given the \texttt{spec}, clicking either one element in any
+plot highlights all points that match the \texttt{Region} category,
+briefly ``categorical linking''. In Figure
+\ref{fig:tourism-linking-fig}, when hovering and selecting the circle
+associated with ``Sydney'' in the scatter plot, all data records with
+shared values of ``Sydney'' listen and react to this interaction via
+self updating in red. In order for comparison with other regions or
+states, press the ``Shift'' key to enable persistent selection, and
+simultaneously select the parent node on the tree, saying ``Western
+Australia'', to include all the children by switching to the blue
+colour. The domestic tourism sees Sydney as one of the most popular
+destinations in realm of business and friends visiting over years.
+Despite of relatively weaker performance in Western Australia,
+Australia's North West region sees the strongest upward trend, bypassing
+Sydney in some years.
 
-\begin{Schunk}
-\begin{figure}
-
-{\centering \includegraphics[width=\textwidth]{img/tourism-linking} 
-
-}
-
-\caption[ToDo]{ToDo}\label{fig:tourism-linking-fig}
-\end{figure}
-\end{Schunk}
+In summary, shared tsibble data nicely bridges between the
+\CRANpkg{crosstalk} and \textbf{tidyverts} ecosystems. The
+\texttt{as\_shared\_tsibble()} provides a symbolic user interface for
+effortless construction of a hybrid of hierarchical and categorical
+linkings. And the \texttt{plotly\_key\_tree()} in turn decodes the
+specification to plot a tree for data overview and navigation,
+accompanied with more detailed plots.
 
 \hypertarget{slicing-and-dicing-time}{%
 \section{Slicing and dicing time}\label{slicing-and-dicing-time}}
@@ -315,19 +329,25 @@ transformed data to shiny server.
 \section{Conclusions and
 discussions}\label{conclusions-and-discussions}}
 
-\bibliography{references.bib}
+\bibliography{tsibbletalk.bib}
 
 \address{%
 Earo Wang\\
-The University of Auckland\\
+The University of Auckland\\%
 Department of Statistics\\ The University of Auckland\\ New Zealand\\
+%
+%
+%
+\\\href{mailto:earo.wang@auckland.ac.nz}{\nolinkurl{earo.wang@auckland.ac.nz}}
 }
-\href{mailto:earo.wang@auckland.ac.nz}{\nolinkurl{earo.wang@auckland.ac.nz}}
 
 \address{%
 Dianne Cook\\
-Monash University\\
+Monash University\\%
 Department of Econometrics and Business Statistics\\ Monash
 University\\ Australia\\
+%
+%
+%
+\\\href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}
 }
-\href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}
