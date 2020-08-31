@@ -10,9 +10,8 @@ print(aus_retail, n = 5)
 library(tidyverse)
 library(ggrepel)
 library(gghighlight)
-library(patchwork)
 
-p_retail_ts <- aus_retail %>% 
+aus_retail %>% 
   as_tibble() %>% # gghighlight issue for group_by() + filter()
   mutate(group = paste(State, ":", Industry)) %>% 
   ggplot(aes(x = Month, y = Turnover)) +
@@ -23,7 +22,7 @@ p_retail_ts <- aus_retail %>%
   ) +
   scale_x_yearmonth(breaks = yearmonth(c("1990 Jan", "2000 Jan", "2010 Jan")))
 
-p_retail_feat <- aus_retail %>% 
+aus_retail %>% 
   features(Turnover, feat_stl) %>% 
   mutate(group = paste(State, ":", Industry)) %>% 
   ggplot(aes(x = trend_strength, y = seasonal_strength_year)) +
@@ -34,5 +33,3 @@ p_retail_feat <- aus_retail %>%
     use_direct_label = FALSE
   ) +
   geom_label_repel(aes(label = group), vjust = 2, nudge_x = -0.1)
-
-p_retail_ts + p_retail_feat + plot_annotation(tag_levels = "a")

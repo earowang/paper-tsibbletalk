@@ -1,6 +1,6 @@
 % !TeX root = RJwrapper.tex
-\title{Conversations in time: interactive visualisation to explore
-structured temporal data}
+\title{Conversations in time: interactive visualisation to explore structured
+temporal data}
 \author{by Earo Wang and Dianne Cook}
 
 \maketitle
@@ -70,22 +70,22 @@ off, series of interest denoted by the \texttt{key} variables often
 remain unchanged over the course of analysis, from trend inspection to
 forecasting performance.
 
-Figure \ref{fig:highlight-retail} (a) gives an overview of 152 series
-for the retail data using an overlaid time series plot, while Figure
-\ref{fig:highlight-retail} (b) presents a scatterplot, where each series
+Figure \ref{fig:highlight-retail-1} gives an overview of 152 series for
+the retail data using an overlaid time series plot, while Figure
+\ref{fig:highlight-retail-2} presents a scatterplot, where each series
 is represented by a dot in the feature space (trend versus seasonal
-strength). The plot making of Figure \ref{fig:highlight-retail} (b) is
+strength). The plot making of Figure \ref{fig:highlight-retail-2} is
 aided with the \texttt{features()} function from \CRANpkg{feasts}, which
 summarises original data by each series down to various statistical
 features. This function along with other \textbf{tidyverts} functions is
 \texttt{tsibble}-aware, and outputs a table in a reduced form where each
 row corresponds to a series, thus graphically displayed as Figure
-\ref{fig:highlight-retail} (b).
+\ref{fig:highlight-retail-2}.
 
 \begin{Schunk}
 \begin{figure}
 
-{\centering \includegraphics[width=\textwidth]{figure/highlight-retail-1} 
+{\centering \subfloat[1\label{fig:highlight-retail-1}]{\includegraphics[width=.49\linewidth]{figure/highlight-retail-1} }\subfloat[2\label{fig:highlight-retail-2}]{\includegraphics[width=.49\linewidth]{figure/highlight-retail-2} }
 
 }
 
@@ -286,6 +286,17 @@ accompanied with more detailed plots.
 \hypertarget{slicing-and-dicing-time}{%
 \section{Slicing and dicing time}\label{slicing-and-dicing-time}}
 
+\begin{Schunk}
+\begin{figure}
+
+{\centering \subfloat[(1)\label{fig:wrap-ped-1}]{\includegraphics[width=\textwidth]{img/wrap-0} }\newline\subfloat[(2)\label{fig:wrap-ped-2}]{\includegraphics[width=\textwidth]{img/wrap-1} }\newline\subfloat[(3)\label{fig:wrap-ped-3}]{\includegraphics[width=\textwidth]{img/wrap-7} }
+
+}
+
+\caption[ToDo]{ToDo}\label{fig:wrap-ped}
+\end{figure}
+\end{Schunk}
+
 The other critical aspect of a tsibble is ``index'', that provides
 foundational temporal context. A common tool in time series analytical
 toolkit is seasonal plots that lay time series not on the whole time
@@ -344,10 +355,10 @@ Department of Statistics\\ The University of Auckland\\ New Zealand\\
 \address{%
 Dianne Cook\\
 Monash University\\%
-Department of Econometrics and Business Statistics\\ Monash
-University\\ Australia\\
+Department of Econometrics and Business Statistics\\ Monash University\\ Australia\\
 %
 %
 %
 \\\href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}
 }
+
