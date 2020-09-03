@@ -286,6 +286,16 @@ accompanied with more detailed plots.
 \hypertarget{slicing-and-dicing-time}{%
 \section{Slicing and dicing time}\label{slicing-and-dicing-time}}
 
+The shared tsibble data leverages the \texttt{key} attribute to converse
+with many coordinated views, with or without \CRANpkg{shiny}. On the
+other hand, a second critical attribute--\texttt{index}--lays the
+foundational temporal context that augments the conversation. When
+temporal data are plotted and stretched against the entire span like
+Figure \ref{fig:highlight-retail-1}, it puts the emphasis on the trend.
+When the data are wrapped over origin-less time units, such as one or
+two quarters, it makes seasonal patterns more pronounced. The
+\CRANpkg{tsibbletalk} package provides a shiny module
+
 \begin{Schunk}
 \begin{figure}
 
@@ -297,20 +307,14 @@ accompanied with more detailed plots.
 \end{figure}
 \end{Schunk}
 
-The other critical aspect of a tsibble is ``index'', that provides
-foundational temporal context. A common tool in time series analytical
-toolkit is seasonal plots that lay time series not on the whole time
-scale, but on an origin-less relative time unit, for example
-\texttt{gg\_season()} in the \{feasts\} package. It helps to examine and
-emphasise periodic/aperiodic patterns, comparing to time series plots
-that primarily focus on trends. Standard seasonal plots break the
-overall time into two components: seasonal periods on the x-axis, and
-grouped by their corresponding lower-resolution time. For example,
-monthly data can be decomposed into months separated by years, and
-hourly data into hours grouped by days. Data collected at lower-level
-resolutions often exhibits more than one seasonal patterns. To discover
-typical seasonal or non-typical profiles, it is helpful to quickly
-browse through many possible periods. Interactivity ought to be enabled.
+Standard seasonal plots break the overall time into two components:
+seasonal periods on the x-axis, and grouped by their corresponding
+lower-resolution time. For example, monthly data can be decomposed into
+months separated by years, and hourly data into hours grouped by days.
+Data collected at lower-level resolutions often exhibits more than one
+seasonal patterns. To discover typical seasonal or non-typical profiles,
+it is helpful to quickly browse through many possible periods.
+Interactivity ought to be enabled.
 
 The \{tsibbletalk\} package provides a pair of UI and server functions,
 as a shiny module, to help with finding interesting time slices in a
