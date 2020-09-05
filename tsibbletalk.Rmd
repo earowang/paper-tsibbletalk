@@ -35,6 +35,7 @@ opts_chunk$set(
 opts_knit$set(root.dir = here::here())
 read_chunk("scripts/demo.R")
 read_chunk("scripts/tourism.R")
+read_chunk("scripts/pedestrian.R")
 ```
 
 ```{r, load-pkgs}
@@ -114,7 +115,7 @@ In summary, shared tsibble data nicely bridges between the \CRANpkg{crosstalk} a
 
 # Slicing and dicing time
 
-The shared tsibble data leverages the `key` attribute to converse with many coordinated views, with or without \CRANpkg{shiny}. On the other hand, a second critical attribute--`index`--lays the foundational temporal context that augments the conversation. When temporal data are plotted and stretched against the entire span like Figure \ref{fig:highlight-retail-1}, it puts the emphasis on the trend. When the data are wrapped over origin-less time units, such as one or two quarters, it makes seasonal patterns more pronounced. The \CRANpkg{tsibbletalk} package provides a shiny module
+The shared tsibble data leverages the `key` attribute to converse with many coordinated views, with or without \CRANpkg{shiny}. On the other hand, a second critical attribute--`index`--lays the foundational temporal context that augments the conversation. When temporal data are plotted and stretched against the entire span like Figure \ref{fig:highlight-retail-1}, it puts emphasis on the trend perception. Yet to digest periodic/aperiodic patterns, data should be wrapped over relative time units that are origin-less, such as one quarter or one day.
 
 ```{r wrap-ped, fig.show = "hold", fig.cap = "ToDo", fig.subcap = c("(1)", "(2)", "(3)"), fig.ncol = 1}
 include_graphics("img/wrap-0.png")
@@ -122,9 +123,17 @@ include_graphics("img/wrap-1.png")
 include_graphics("img/wrap-7.png")
 ```
 
-Standard seasonal plots break the overall time into two components: seasonal periods on the x-axis, and grouped by their corresponding lower-resolution time. For example, monthly data can be decomposed into months separated by years, and hourly data into hours grouped by days. Data collected at lower-level resolutions often exhibits more than one seasonal patterns. To discover typical seasonal or non-typical profiles, it is helpful to quickly browse through many possible periods. Interactivity ought to be enabled.
+The city of Melbourne has sensors installed to count hourly tallies of pedestrians in order to capture downtown daily rhythms (cite). Figure \ref{fig:wrap-ped} shows the first five months of 2020 foot traffic at four locations, with the depiction of three pronounced slices in time. Figure \ref{fig:wrap-ped-1} unfolds all counts from January to May on their absolute time scales, facetted by four sensors. On March 16, Melbourne went to the stage three lockdown due to COVID-19, seeing a significant decline in traffic volume across the city. These lines are then folded into daily and weekly sections, shown as Figure \ref{fig:wrap-ped-2} and \ref{fig:wrap-ped-3} respectively. Seasonal variations have been popped out to viewers, complementing the not-just-magnitude-drop data story. The pre-lockdown period is coloured with dark green and lockdown with orange.
 
-The {tsibbletalk} package provides a pair of UI and server functions, as a shiny module, to help with finding interesting time slices in a shiny application. The pair, decoupled to `tsibbleDiceUI()` and `tsibbleDiceServer()`, presents a clean interface and forms a resusable piece. Like all shiny modules, users should supply a unique session id. The UI function `tsibbleDiceUI()` shows a slider that controls the number of periods, and a plot specified by users. The server function `tsibbleDiceServer()` is the workhorse, transforming data and updating the plot. It expects a `ggplot` (converted to `plotly` via `ggplotly()`) or `plotly` object. This plot can be line charts, or other graphical elements (such as boxplots). But it assumes that tsibble's time index is plotted on the x-axis. The other mandatory argument is to specify the number of seasonal periods that requires shifting.
+Figure \ref{fig:wrap-ped} suggests that there could be more than one interesting time slices. The \CRANpkg{tsibbletalk} package provides a pair of UI and server functions, as a shiny module, to help with finding interesting seasonal slices in a shiny application. The pair, decoupled to `tsibbleDiceUI()` and `tsibbleDiceServer()`, presents a clean interface and forms a resusable piece. Like all shiny modules, users should supply a unique session id. The UI function `tsibbleDiceUI()` shows a slider that controls the number of periods, and a plot specified by users. The server function `tsibbleDiceServer()` is the workhorse, transforming data and updating the plot. It expects a `ggplot` (converted to `plotly` via `ggplotly()`) or `plotly` object. This plot can be line charts, or other graphical elements (such as boxplots). But it assumes that tsibble's time index is plotted on the x-axis. The other mandatory argument is to specify the number of seasonal periods that requires shifting.
+
+```{r load-ped, eval = FALSE}
+```
+
+```{r ped-slice, echo = TRUE, eval = FALSE}
+```
+
+Standard seasonal plots break the overall time into two components: seasonal periods on the x-axis, and grouped by their corresponding lower-resolution time. For example, monthly data can be decomposed into months separated by years, and hourly data into hours grouped by days. Data collected at lower-level resolutions often exhibits more than one seasonal patterns. To discover typical seasonal or non-typical profiles, it is helpful to quickly browse through many possible periods. Interactivity ought to be enabled.
 
 (Data flows) Transformed data generally requires redrawing the plot, and worsen the performance of shiny. The underlying tsibble data is called back and transformed in R. Using the `plotly.js` react method, only transformed data is sent to the server side, while keeping the rest configuration unchanged (e.g. layout and graphical elements). It is performant, and users will not experience notable delay in response to the change in the slider input. Dissect time index, and propagate transformed data to shiny server.
 
