@@ -24,7 +24,9 @@ p_line <- pedestrian20 %>%
   scale_colour_brewer(palette = "Dark2") +
   theme(legend.position = "none")
 
-ui <- fluidPage(tsibbleDiceUI("dice"))
+ui <- fluidPage(
+  tsibbleDiceUI("dice")
+)
 server <- function(input, output, session) {
   tsibbleDiceServer("dice", ggplotly(p_line, height = 700), period = "1 day")
 }
