@@ -64,8 +64,8 @@ Figure \ref{fig:highlight-retail} highlights not only a series with strongest se
 
 # Overview of interactivity
 
-* {cranvas} and {cranvastime}
 * [crossfilter.js](http://crossfilter.github.io/crossfilter/) & [dc.js](https://dc-js.github.io/dc.js/)
+* {cranvas} and {cranvastime}
 * {crosstalk} and html widgets
 * {rJava}, {rbokeh} {loon}
 
@@ -123,7 +123,7 @@ include_graphics("img/wrap-1.png")
 include_graphics("img/wrap-7.png")
 ```
 
-The city of Melbourne has sensors installed to count hourly tallies of pedestrians in order to capture downtown daily rhythms (cite). Figure \ref{fig:wrap-ped} shows the first five months of 2020 foot traffic at four locations, with the depiction of three pronounced slices in time. Figure \ref{fig:wrap-ped-1} unfolds all counts from January to May on their absolute time scales, facetted by four sensors. On March 16, Melbourne went to the stage three lockdown due to COVID-19, seeing a significant decline in traffic volume across the city. These lines are then folded into daily and weekly sections, shown as Figure \ref{fig:wrap-ped-2} and \ref{fig:wrap-ped-3} respectively. Seasonal variations have been popped out to viewers, complementing the not-just-magnitude-drop story. The pre-lockdown period is coloured with dark green and lockdown with orange.
+The city of Melbourne has sensors installed to count hourly tallies of pedestrians in order to capture downtown daily rhythms (cite). Figure \ref{fig:wrap-ped} shows the first five months of 2020 foot traffic at four locations, with the depiction of three pronounced slices in time. Figure \ref{fig:wrap-ped-1} unfolds all counts from January to May on their absolute time line, facetted by four sensors. On March 16, Melbourne went to the stage three lockdown due to COVID-19, seeing a significant decline in traffic volume across the city. These lines are then folded into daily and weekly sections, shown as Figure \ref{fig:wrap-ped-2} and \ref{fig:wrap-ped-3} respectively. Seasonal variations have been popped out to viewers, complementing the not-just-magnitude-drop story. The pre-lockdown period is coloured with dark green and lockdown with orange.
 
 The wrapping procedure involves slicing time indices into seasonal periods of interest and their corresponding time dices. For example, hourly pedestrian data can be decomposed into 24-hour blocks grouped by all respective days, like Figure \ref{fig:wrap-ped-2}. Figure \ref{fig:wrap-ped} suggests that there could be more than one eye-catching slices out of many possible combinations, and thus repeated wrappings can be unwieldy. To visually locate an interesting slice, the \CRANpkg{tsibbletalk} package implements a shiny module, a pair of UI and server functions, to automate this wrapping procedure.
 
@@ -137,7 +137,7 @@ This shiny module, decoupled to `tsibbleDiceUI()` and `tsibbleDiceServer()`, pre
 
 Upon running the shiny application, Figure \ref{fig:wrap-ped-1} corresponds to the initial state, with the slider incremented by 1-day unit. The "play" button near the end of slider begins animating the slicing and dicing process by walking through all 24 hours by 153 days. Alternatively, users can drag the handler to poke around certain slices themselves.
 
-In response to the slider input, the plot will be updated and loaded with newly transformed data. Keeping the application as performant as possible is the top priority. Without completely redrawing the plot, the `plotly.js` react method is invoked internally. The underlying tsibble data is being called back and processed in R. Only transformed data gets fed back to the shiny server, along with reseting the x-axis ranges and breaks. The rest plot configurations, such as marks, y-axes, and layouts, are properly cached.
+In response to the slider input, the plot will be updated and loaded with newly transformed data. At its core, keeping the application as performant as possible is the top priority. Without completely redrawing the plot, the `plotly.js` react method is invoked internally. The underlying tsibble data is being called back and processed in R. Only transformed data gets fed back to the shiny server, along with reseting the x-axis ranges and breaks. The rest plot configurations, such as marks, y-axes, and layouts, are properly cached.
 
 The new shiny module exploits the temporal aspect for a tsibble object. It allows users to slide through relative periods to explore seasonal insights, with slick user experience.
 
