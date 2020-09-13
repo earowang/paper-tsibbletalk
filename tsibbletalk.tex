@@ -12,7 +12,7 @@ interesting periodic/aperiodic slices. This package implements a shared
 \texttt{tsibble} object that allows for linked brushing for coordinated
 views, and a shiny module that aids in wrapping time lines for seasonal
 patterns. The basic usage of functions is demonstrated in the article,
-wit data examples.
+with data examples.
 }
 
 \hypertarget{introduction}{%
@@ -91,11 +91,11 @@ row corresponds to a series, thus graphically displayed as Figure
 \begin{Schunk}
 \begin{figure}
 
-{\centering \subfloat[1\label{fig:highlight-retail-1}]{\includegraphics[width=.49\linewidth]{figure/highlight-retail-1} }\subfloat[2\label{fig:highlight-retail-2}]{\includegraphics[width=.49\linewidth]{figure/highlight-retail-2} }
+{\centering \subfloat[\label{fig:highlight-retail-1}]{\includegraphics[width=.49\linewidth]{figure/highlight-retail-1} }\subfloat[\label{fig:highlight-retail-2}]{\includegraphics[width=.49\linewidth]{figure/highlight-retail-2} }
 
 }
 
-\caption[ToDo]{ToDo}\label{fig:highlight-retail}
+\caption[Plots for the \code{aus\_retail} data, with the series of strongest seasonal strength highlighted]{Plots for the \code{aus\_retail} data, with the series of strongest seasonal strength highlighted. (a) An overlaid time series plot. (b) A scatter plot drawn from their time series features, where each dot represents a time series from (a).}\label{fig:highlight-retail}
 \end{figure}
 \end{Schunk}
 
@@ -164,7 +164,7 @@ Given time series plots, click any data point on a line, highlighting
 the whole line as a result. The \texttt{as\_shared\_tsibble()} uses
 \texttt{tsibble}'s \texttt{key} variables to achieve these types of
 linking, and the \texttt{spec} argument takes one step further in
-constructing hybrid linking, such as hierarchical and categorical
+constructing hybrid linking, for example hierarchical and categorical
 linking. For example, each series in the \texttt{aus\_retail} data
 corresponds to all possible combinations of the \texttt{State} and
 \texttt{Industry} variables. They are intrinsically crossed with each
@@ -207,7 +207,7 @@ tourism_shared <- tourism_monthly %>%
 
 }
 
-\caption[ToDo]{ToDo}\label{fig:tourism-linking-fig}
+\caption[Coordinated views generated from the \code{tourism\_shared} with persistent linked brushing]{Coordinated views generated from the \code{tourism\_shared} with persistent linked brushing.}\label{fig:tourism-linking-fig}
 \end{figure}
 \end{Schunk}
 
@@ -218,7 +218,7 @@ lower-level tourism regions. A new handy function
 hierarchical discovery arising from the data. It interprets hierarchies
 in the shared tsibble's \texttt{spec} as a tree view, built with
 \CRANpkg{plotly}. The following code line produces the linked tree
-diagram and fills the left panel of Figure
+diagram and spans the left panel of Figure
 \ref{fig:tourism-linking-fig}. The visual of tree hierarchy untangles a
 group of related series and snapshots the data organisation from a
 bird's eye view.
@@ -321,11 +321,11 @@ quarter or one day.
 \begin{Schunk}
 \begin{figure}
 
-{\centering \subfloat[(1)\label{fig:wrap-ped-1}]{\includegraphics[width=\textwidth]{img/wrap-0} }\newline\subfloat[(2)\label{fig:wrap-ped-2}]{\includegraphics[width=\textwidth]{img/wrap-1} }\newline\subfloat[(3)\label{fig:wrap-ped-3}]{\includegraphics[width=\textwidth]{img/wrap-7} }
+{\centering \subfloat[Initial overview state\label{fig:wrap-ped-1}]{\includegraphics[width=\textwidth]{img/wrap-0} }\newline\subfloat[1-day state\label{fig:wrap-ped-2}]{\includegraphics[width=\textwidth]{img/wrap-1} }\newline\subfloat[7-day state\label{fig:wrap-ped-3}]{\includegraphics[width=\textwidth]{img/wrap-7} }
 
 }
 
-\caption[ToDo]{ToDo}\label{fig:wrap-ped}
+\caption[The shiny module for wrapping the \code{pedestrian20} data]{The shiny module for wrapping the \code{pedestrian20} data.}\label{fig:wrap-ped}
 \end{figure}
 \end{Schunk}
 

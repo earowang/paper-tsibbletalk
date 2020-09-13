@@ -16,7 +16,7 @@ abstract: >
   slices. This package implements a shared `tsibble` object that allows for
   linked brushing for coordinated views, and a shiny module that aids in wrapping
   time lines for seasonal patterns. The basic usage of functions is demonstrated
-  in the article, wit data examples.
+  in the article, with data examples.
 preamble: |
   \usepackage{subfig}
 output: rticles::rjournal_article
@@ -56,7 +56,7 @@ In the spirit of tidy data to the \CRANpkg{tidyverse} [@Wickham2019], the **tidy
 
 Figure \ref{fig:highlight-retail-1} gives an overview of 152 series for the retail data using an overlaid time series plot, while Figure \ref{fig:highlight-retail-2} presents a scatterplot, where each series is represented by a dot in the feature space (trend versus seasonal strength). The plot making of Figure \ref{fig:highlight-retail-2} is aided with the `features()` function from \CRANpkg{feasts}, which summarises original data by each series down to various statistical features. This function along with other **tidyverts** functions is `tsibble`-aware, and outputs a table in a reduced form where each row corresponds to a series, thus graphically displayed as Figure \ref{fig:highlight-retail-2}.
 
-```{r highlight-retail, fig.height = 6, out.width = ".49\\linewidth", fig.show = "hold", fig.cap = "ToDo", fig.subcap = c("1", "2"), fig.ncol = 2}
+```{r highlight-retail, fig.height = 6, out.width = ".49\\linewidth", fig.show = "hold", fig.cap = "Plots for the \\code{aus\\_retail} data, with the series of strongest seasonal strength highlighted. (a) An overlaid time series plot. (b) A scatter plot drawn from their time series features, where each dot represents a time series from (a).", fig.subcap = c("", ""), fig.ncol = 2}
 ```
 
 Figure \ref{fig:highlight-retail} highlights not only a series with strongest seasonality, but also a need to querying interesting series on the fly. Without interactivity, one needs to first filter the interesting series out from the features table, and join back to the original `tsibble` in order to examine its trend in relation to others. This procedure can soon grow cumbersome if many series to be discovered. Despite that the two plots are static, they can be considered as linked views via the common `key` variables between two tables. This motivates enabling interactivity of `tsibble` and `tsibble`-derived objects for rapid exploratory data analysis.
@@ -73,7 +73,7 @@ If not using web technology, two examples are provided here: \CRANpkg{loon} [@R-
 
 The \CRANpkg{tsibbletalk} package, inspired by the \CRANpkg{crosstalk} package, introduces a shared tsibble instance on top of a `tsibble` to allow for frictionless communication between different plots for temporal data. The `as_shared_tsibble()` function provides an entry point in the integrated flow, turning a `tsibble` to a shared instance (i.e. `SharedTsibbleData` subclassing of `SharedData` from \CRANpkg{crosstalk}) that powers data transmission across multiple views. The \CRANpkg{tsibbletalk} package aims to streamline interactive graphical analysis with the focus of temporal and structured linking.
 
-As opposed to one-to-one linking, \CRANpkg{tsibbletalk} defaults to categorical linking where marking one or more observations in one category will broadcast to all other observations in this category. Given time series plots, click any data point on a line, highlighting the whole line as a result. The `as_shared_tsibble()` uses `tsibble`'s `key` variables to achieve these types of linking, and the `spec` argument takes one step further in constructing hybrid linking, such as hierarchical and categorical linking. For example, each series in the `aus_retail` data corresponds to all possible combinations of the `State` and `Industry` variables. They are intrinsically crossed with each other. If one variable is nested within another, this lends itself to a hierarchical structure, like geographical hierarchy. Such collection of inter-related time series are referred to as hierarchical and grouped time series in the literature [@fpp].
+As opposed to one-to-one linking, \CRANpkg{tsibbletalk} defaults to categorical linking where marking one or more observations in one category will broadcast to all other observations in this category. Given time series plots, click any data point on a line, highlighting the whole line as a result. The `as_shared_tsibble()` uses `tsibble`'s `key` variables to achieve these types of linking, and the `spec` argument takes one step further in constructing hybrid linking, for example hierarchical and categorical linking. For example, each series in the `aus_retail` data corresponds to all possible combinations of the `State` and `Industry` variables. They are intrinsically crossed with each other. If one variable is nested within another, this lends itself to a hierarchical structure, like geographical hierarchy. Such collection of inter-related time series are referred to as hierarchical and grouped time series in the literature [@fpp].
 
 To incorporate structured specifications in the `key`, a symbolic formula can be passed to the `spec` argument. Adopting Wilkinson notations for factorial models [@Wilkinson1973], the `spec` follows the `/` and `*` operators tradition to declare nesting and crossing variables respectively. The `spec` for the `aus_retail` data is therefore specified as `State * Industry` or `Industry * State`, which is the default for the presence of multiple `key` variables. If there is a hierarchy in the data, using `/` is required to indicate the parent-child relation, as strictly one direction `parent/child`.
 
@@ -85,11 +85,11 @@ The `tourism_monthly` dataset [@tourism] packaged in \CRANpkg{tsibbletalk}, cont
 ```{r load-other-pkgs}
 ```
 
-```{r tourism-linking-fig, fig.cap = "ToDo"}
+```{r tourism-linking-fig, fig.cap = "Coordinated views generated from the \\code{tourism\\_shared} with persistent linked brushing."}
 include_graphics("img/tourism-linking.png")
 ```
 
-This dataset contains a three-level hierarchy: the root node is implicitly Australia, and geographically disaggregated to states and lower-level tourism regions. A new handy function `plotly_key_tree()` has been implemented to address the need of hierarchical discovery arising from the data. It interprets hierarchies in the shared tsibble's `spec` as a tree view, built with \CRANpkg{plotly}. The following code line produces the linked tree diagram and fills the left panel of Figure \ref{fig:tourism-linking-fig}. The visual of tree hierarchy untangles a group of related series and snapshots the data organisation from a bird's eye view.
+This dataset contains a three-level hierarchy: the root node is implicitly Australia, and geographically disaggregated to states and lower-level tourism regions. A new handy function `plotly_key_tree()` has been implemented to address the need of hierarchical discovery arising from the data. It interprets hierarchies in the shared tsibble's `spec` as a tree view, built with \CRANpkg{plotly}. The following code line produces the linked tree diagram and spans the left panel of Figure \ref{fig:tourism-linking-fig}. The visual of tree hierarchy untangles a group of related series and snapshots the data organisation from a bird's eye view.
 
 ```{r plotly-key-tree, echo = TRUE}
 ```
@@ -117,7 +117,7 @@ In summary, shared tsibble data nicely bridges between the \CRANpkg{crosstalk} a
 
 The shared tsibble data leverages the `key` attribute to converse with many coordinated views, with or without \CRANpkg{shiny}. On the other hand, a second critical attribute--`index`--lays the foundational temporal context that augments the conversation. When temporal data are plotted and stretched against the entire span like Figure \ref{fig:highlight-retail-1}, it puts emphasis on the trend perception. Yet to digest periodic/aperiodic patterns, data should be wrapped over relative time units that are origin-less, such as one quarter or one day.
 
-```{r wrap-ped, fig.show = "hold", fig.cap = "ToDo", fig.subcap = c("(1)", "(2)", "(3)"), fig.ncol = 1}
+```{r wrap-ped, fig.show = "hold", fig.cap = "The shiny module for wrapping the \\code{pedestrian20} data.", fig.subcap = c("Initial overview state", "1-day state", "7-day state"), fig.ncol = 1}
 include_graphics("img/wrap-0.png")
 include_graphics("img/wrap-1.png")
 include_graphics("img/wrap-7.png")
