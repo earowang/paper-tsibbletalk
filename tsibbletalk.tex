@@ -1,12 +1,18 @@
 % !TeX root = RJwrapper.tex
-\title{Conversations in time: interactive visualisation to explore
-structured temporal data}
+\title{Conversations in time: interactive visualisation to explore structured
+temporal data}
 \author{by Earo Wang and Dianne Cook}
 
 \maketitle
 
 \abstract{%
-An abstract of less than 150 words.
+The \pkg{tsibbletalk} package can be used to interactively explore
+temporal data of nesting and crossing structures, and discover
+interesting periodic/aperiodic slices. This package implements a shared
+\texttt{tsibble} object that allows for linked brushing for coordinated
+views, and a shiny module that aids in wrapping time lines for seasonal
+patterns. The basic usage of functions is demonstrated in the article,
+wit data examples.
 }
 
 \hypertarget{introduction}{%
@@ -114,10 +120,10 @@ into two classes: ones with web technology and the others without.
 
 R \CRANpkg{shiny} \citep{R-shiny} and \CRANpkg{htmlwidgets}
 \citep{R-htmlwidgets} lay a fundamental infrastructure in marrying R
-with HTML elements and Javascript for interactivity, although they do
-not emphasise on interactive graphics. The \CRANpkg{htmlwidgets} package
-opens a door to embedding Javascript libraries into R such that users
-are able to write only R code to generate web-based plots. Many
+with HTML elements and Javascript for interactivity, although they
+seldom emphasise on interactive graphics. The \CRANpkg{htmlwidgets}
+package opens a door to embedding Javascript libraries into R such that
+users are able to write only R code to generate web-based plots. Many
 Javascript charting libraries have been ported to R as HTML widgets,
 including \CRANpkg{plotly} \citep{plotly2020}, \CRANpkg{rbokeh}
 \citep{R-rbokeh}, and \CRANpkg{leaflet} \citep{R-leaflet} for maps. To
@@ -365,9 +371,9 @@ tsibble is needed to start the engine, and thereby the time
 option semantically takes a desired number of seasonal periods to be
 shifted, for example data shifted by ``1 day'', ``2 days'', or ``1
 week'', etc. In other words, the \texttt{period} defines the grind
-level. As for date-times (represented by \texttt{POSIXt}), it ranges
-from from fine ``day'' to coarse ``year''. The following code snippet
-generates Figure \ref{fig:wrap-ped}.
+level. For date-times (represented by \texttt{POSIXt}), the adjustment
+ranges from from fine ``day'' to coarse ``year''. The following code
+snippet generates Figure \ref{fig:wrap-ped}.
 
 \begin{Schunk}
 \begin{Sinput}
@@ -380,10 +386,10 @@ p_line <- pedestrian20 %>%
   theme(legend.position = "none")
 
 ui <- fluidPage(
-  tsibbleDiceUI("dice")
+  tsibbleWrapUI("dice")
 )
 server <- function(input, output, session) {
-  tsibbleDiceServer("dice", ggplotly(p_line, height = 700), period = "1 day")
+  tsibbleWrapServer("dice", ggplotly(p_line, height = 700), period = "1 day")
 }
 shinyApp(ui, server)
 \end{Sinput}
@@ -434,3 +440,4 @@ Melbourne, Australia\\
 %
 \\\href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}
 }
+

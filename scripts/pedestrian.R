@@ -25,9 +25,9 @@ p_line <- pedestrian20 %>%
   theme(legend.position = "none")
 
 ui <- fluidPage(
-  tsibbleDiceUI("dice")
+  tsibbleWrapUI("dice")
 )
 server <- function(input, output, session) {
-  tsibbleDiceServer("dice", ggplotly(p_line, height = 700), period = "1 day")
+  tsibbleWrapServer("dice", ggplotly(p_line, height = 700), period = "1 day")
 }
 shinyApp(ui, server)

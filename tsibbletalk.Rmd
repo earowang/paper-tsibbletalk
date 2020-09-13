@@ -11,7 +11,12 @@ author:
   email: dicook@monash.edu
 bibliography: tsibbletalk.bib
 abstract: >
-  An abstract of less than 150 words.
+  The \pkg{tsibbletalk} package can be used to interactively explore temporal data
+  of nesting and crossing structures, and discover interesting periodic/aperiodic
+  slices. This package implements a shared `tsibble` object that allows for
+  linked brushing for coordinated views, and a shiny module that aids in wrapping
+  time lines for seasonal patterns. The basic usage of functions is demonstrated
+  in the article, wit data examples.
 preamble: |
   \usepackage{subfig}
 output: rticles::rjournal_article
