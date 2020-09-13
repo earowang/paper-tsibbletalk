@@ -34,15 +34,15 @@ declares a data column that holds time-related indices. The \texttt{key}
 identifies a collection of related series or panels observed over the
 \texttt{index}-defined period, which can comprise multiple columns.
 Below displays the monthly Australian retail trade turnover data
-(\texttt{aus\_retail}), available in the \CRANpkg{tsibbledata} package.
-The \texttt{Month} column holds year-months as \texttt{index}. The
-\texttt{State} together with \texttt{Industry} are the identifiers for
-these 152 series, highlighted as \texttt{key}. Note that the column
-\texttt{Series\ ID} could be an alternative option for setting up
-\texttt{key}, but \texttt{State} and \texttt{Industry} are more readable
-and informative. The \texttt{index} and \texttt{key} are ``sticky''
-columns to a \texttt{tsibble}, forming critical pieces for fluent
-temporal data analysis later.
+(\texttt{aus\_retail}), available in the \CRANpkg{tsibbledata} package
+\citep{R-tsibbledata}. The \texttt{Month} column holds year-months as
+\texttt{index}. The \texttt{State} together with \texttt{Industry} are
+the identifiers for these 152 series, highlighted as \texttt{key}. Note
+that the column \texttt{Series\ ID} could be an alternative option for
+setting up \texttt{key}, but \texttt{State} and \texttt{Industry} are
+more readable and informative. The \texttt{index} and \texttt{key} are
+``sticky'' columns to a \texttt{tsibble}, forming critical pieces for
+fluent temporal data analysis later.
 
 \begin{Schunk}
 \begin{Soutput}
@@ -63,12 +63,12 @@ In the spirit of tidy data to the \CRANpkg{tidyverse}
 \citep{Wickham2019}, the \textbf{tidyverts} suite features
 \texttt{tsibble} as the foundational data structure, in order to build a
 fluid and fluent pipeline for time series analysis. Besides
-\CRANpkg{tsibble}, the \CRANpkg{feasts} and \CRANpkg{fable} packages
-fill the role of statistical analysis and forecasting in the
-\textbf{tidyverts} ecosystem. When time series analysis starts taking
-off, series of interest denoted by the \texttt{key} variables often
-remain unchanged over the course of analysis, from trend inspection to
-forecasting performance.
+\CRANpkg{tsibble}, the \CRANpkg{feasts} \citep{R-feasts} and
+\CRANpkg{fable} \citep{R-fable} packages fill the role of statistical
+analysis and forecasting in the \textbf{tidyverts} ecosystem. When time
+series analysis starts taking off, series of interest denoted by the
+\texttt{key} variables often remain unchanged over the course of
+analysis, from trend inspection to forecasting performance.
 
 Figure \ref{fig:highlight-retail-1} gives an overview of 152 series for
 the retail data using an overlaid time series plot, while Figure
@@ -112,26 +112,29 @@ The R community has a long-standing contribution to interactive
 visualisation systems in abundance. These systems can be roughly divided
 into two classes: ones with web technology and the others without.
 
-R \CRANpkg{shiny} and \CRANpkg{htmlwidgets} lay a fundamental
-infrastructure in marrying R with HTML elements and Javascript for
-interactivity, although they do not emphasise on interactive graphics.
-The \CRANpkg{htmlwidgets} package opens a door to embedding Javascript
-libraries into R such that users are able to write only R code to
-generate web-based plots. Many Javascript charting libraries have been
-ported to R as HTML widgets, including \CRANpkg{plotly},
-\CRANpkg{rbokeh}, and \CRANpkg{leaflet} for maps. To enable interactions
-between different widgets, it can be achieved with \CRANpkg{shiny} or
-\CRANpkg{crosstalk}. The \CRANpkg{crosstalk} extends
-\CRANpkg{htmlwidgets} with shared R6 instances to support linked
-brushing and filtering across widgets.
+R \CRANpkg{shiny} \citep{R-shiny} and \CRANpkg{htmlwidgets}
+\citep{R-htmlwidgets} lay a fundamental infrastructure in marrying R
+with HTML elements and Javascript for interactivity, although they do
+not emphasise on interactive graphics. The \CRANpkg{htmlwidgets} package
+opens a door to embedding Javascript libraries into R such that users
+are able to write only R code to generate web-based plots. Many
+Javascript charting libraries have been ported to R as HTML widgets,
+including \CRANpkg{plotly} \citep{plotly2020}, \CRANpkg{rbokeh}
+\citep{R-rbokeh}, and \CRANpkg{leaflet} \citep{R-leaflet} for maps. To
+enable interactions between different widgets, it can be achieved with
+\CRANpkg{shiny} or \CRANpkg{crosstalk} \citep{R-crosstalk}. The
+\CRANpkg{crosstalk} extends \CRANpkg{htmlwidgets} with shared R6
+instances to support linked brushing and filtering across widgets,
+without relying on \CRANpkg{shiny}.
 
 If not using web technology, two examples are provided here:
-\CRANpkg{loon} based on Tcl/Tk and \CRANpkg{cranvas} based on Qt. They
-offer a wide array of pre-defined interactions, such as selecting and
-zooming, to manipulate plots via mouse, keyboard strokes, and menus. The
-\CRANpkg{cranvastime} is an add-on of \CRANpkg{cranvas}, which develops
-a set of novel interactions for temporal data, for example wrapping and
-mirroring.
+\CRANpkg{loon} \citep{R-loon} based on Tcl/Tk and \pkg{cranvas}
+\citep{xie_reactive_2014} based on Qt. They offer a wide array of
+pre-defined interactions, such as selecting and zooming, to manipulate
+plots via mouse, keyboard strokes, and menus. The \pkg{cranvastime}
+package \citep{cheng_enabling_2016} is an add-on of \pkg{cranvas}, which
+develops a set of novel interactions for temporal data, for example
+wrapping and mirroring.
 
 \hypertarget{interactivity-for-coordinated-views-via-shared-temporal-data}{%
 \section{Interactivity for coordinated views via shared temporal
@@ -175,13 +178,13 @@ default for the presence of multiple \texttt{key} variables. If there is
 a hierarchy in the data, using \texttt{/} is required to indicate the
 parent-child relation, as strictly one direction \texttt{parent/child}.
 
-The \texttt{tourism\_monthly} dataset packaged in \CRANpkg{tsibbletalk},
-contains monthly domestic overnight trips across Australia, to give an
-illustrator of nesting and crossing. The \texttt{key} is comprised of
-three identifying variables: \texttt{State}, \texttt{Region}, and
-\texttt{Purpose} (of trip), in particular \texttt{State} nesting of
-\texttt{Region}, together crossed with \texttt{Purpose}. This
-specification can be translated as follows:
+The \texttt{tourism\_monthly} dataset \citep{tourism} packaged in
+\CRANpkg{tsibbletalk}, contains monthly domestic overnight trips across
+Australia, to give an illustrator of nesting and crossing. The
+\texttt{key} is comprised of three identifying variables:
+\texttt{State}, \texttt{Region}, and \texttt{Purpose} (of trip), in
+particular \texttt{State} nesting of \texttt{Region}, together crossed
+with \texttt{Purpose}. This specification can be translated as follows:
 
 \begin{Schunk}
 \begin{Sinput}
@@ -321,11 +324,11 @@ quarter or one day.
 \end{Schunk}
 
 The city of Melbourne has sensors installed to count hourly tallies of
-pedestrians in order to capture downtown daily rhythms (cite). Figure
-\ref{fig:wrap-ped} shows the first five months of 2020 foot traffic at
-four locations, with the depiction of three pronounced slices in time.
-Figure \ref{fig:wrap-ped-1} unfolds all counts from January to May on
-their absolute time line, facetted by four sensors. On March 16,
+pedestrians in order to capture downtown daily rhythms \citep{ped}.
+Figure \ref{fig:wrap-ped} shows the first five months of 2020 foot
+traffic at four locations, with the depiction of three pronounced slices
+in time. Figure \ref{fig:wrap-ped-1} unfolds all counts from January to
+May on their absolute time line, facetted by four sensors. On March 16,
 Melbourne went to the stage three lockdown due to COVID-19, seeing a
 significant decline in traffic volume across the city. These lines are
 then folded into daily and weekly sections, shown as Figure
@@ -344,15 +347,15 @@ wrappings can be unwieldy. To visually locate an interesting slice, the
 \CRANpkg{tsibbletalk} package implements a shiny module, a pair of UI
 and server functions, to automate this wrapping procedure.
 
-This shiny module, decoupled to \texttt{tsibbleDiceUI()} and
-\texttt{tsibbleDiceServer()}, presents a clean interface and forms a
+This shiny module, decoupled to \texttt{tsibbleWrapUI()} and
+\texttt{tsibbleWrapServer()}, presents a clean interface and forms a
 resusable piece in a shiny application. A shiny module provides the
 vehicle in modularising shiny applications for both users and
 developers. Like all shiny modules, the first argument in both functions
 requires a user-supplied session id that must be unique. The UI function
-\texttt{tsibbleDiceUI()} simply shows a slider that animates or controls
+\texttt{tsibbleWrapUI()} simply shows a slider that animates or controls
 the number of periods to be diced. The workhorse is certainly the server
-function \texttt{tsibbleDiceServer()}, encapsulating the algorithm that
+function \texttt{tsibbleWrapServer()}, encapsulating the algorithm that
 transforms data and sends messages to update the plot accordingly. The
 \texttt{plot} argument expects a \texttt{ggplot} or \texttt{plotly}
 object, where one can plot data using either lines or other graphical
@@ -415,7 +418,7 @@ discussions}\label{conclusions-and-discussions}}
 \address{%
 Earo Wang\\
 The University of Auckland\\%
-Department of Statistics\\ The University of Auckland\\ New Zealand\\
+Auckland, New Zealand\\
 %
 %
 %
@@ -425,8 +428,7 @@ Department of Statistics\\ The University of Auckland\\ New Zealand\\
 \address{%
 Dianne Cook\\
 Monash University\\%
-Department of Econometrics and Business Statistics\\ Monash
-University\\ Australia\\
+Melbourne, Australia\\
 %
 %
 %

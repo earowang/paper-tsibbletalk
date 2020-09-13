@@ -3,17 +3,11 @@ title: "Conversations in time: interactive visualisation to explore structured t
 author:
 - name: Earo Wang
   affiliation: The University of Auckland
-  address:
-  - Department of Statistics
-  - The University of Auckland
-  - New Zealand
+  address: Auckland, New Zealand
   email: earo.wang@auckland.ac.nz
 - name: Dianne Cook
   affiliation: Monash University
-  address:
-  - Department of Econometrics and Business Statistics
-  - Monash University
-  - Australia
+  address: Melbourne, Australia
   email: dicook@monash.edu
 bibliography: tsibbletalk.bib
 abstract: >
@@ -48,12 +42,12 @@ read_chunk("scripts/pedestrian.R")
 
 # Background: tidy temporal data and workflow
 
-The \CRANpkg{tsibble} package [@wang2020tsibble] introduces a unified temporal data structure, referred to as a `tsibble`, to represent time series and longitudinal data in a tidy format [@wickham2014tidy]. That said, a `tsibble` extends the `data.frame` and \CRANpkg{tibble} classes with temporally contextual metadata: `index` and `key`. The `index` declares a data column that holds time-related indices. The `key` identifies a collection of related series or panels observed over the `index`-defined period, which can comprise multiple columns. Below displays the monthly Australian retail trade turnover data (`aus_retail`), available in the \CRANpkg{tsibbledata} package. The `Month` column holds year-months as `index`. The `State` together with `Industry` are the identifiers for these 152 series, highlighted as `key`. Note that the column `Series ID` could be an alternative option for setting up `key`, but `State` and `Industry` are more readable and informative. The `index` and `key` are "sticky" columns to a `tsibble`, forming critical pieces for fluent temporal data analysis later.
+The \CRANpkg{tsibble} package [@wang2020tsibble] introduces a unified temporal data structure, referred to as a `tsibble`, to represent time series and longitudinal data in a tidy format [@wickham2014tidy]. That said, a `tsibble` extends the `data.frame` and \CRANpkg{tibble} classes with temporally contextual metadata: `index` and `key`. The `index` declares a data column that holds time-related indices. The `key` identifies a collection of related series or panels observed over the `index`-defined period, which can comprise multiple columns. Below displays the monthly Australian retail trade turnover data (`aus_retail`), available in the \CRANpkg{tsibbledata} package [@R-tsibbledata]. The `Month` column holds year-months as `index`. The `State` together with `Industry` are the identifiers for these 152 series, highlighted as `key`. Note that the column `Series ID` could be an alternative option for setting up `key`, but `State` and `Industry` are more readable and informative. The `index` and `key` are "sticky" columns to a `tsibble`, forming critical pieces for fluent temporal data analysis later.
 
 ```{r, print-retail}
 ```
 
-In the spirit of tidy data to the \CRANpkg{tidyverse} [@Wickham2019], the **tidyverts** suite features `tsibble` as the foundational data structure, in order to build a fluid and fluent pipeline for time series analysis. Besides \CRANpkg{tsibble}, the \CRANpkg{feasts} and \CRANpkg{fable} packages fill the role of statistical analysis and forecasting in the **tidyverts** ecosystem. When time series analysis starts taking off, series of interest denoted by the `key` variables often remain unchanged over the course of analysis, from trend inspection to forecasting performance.
+In the spirit of tidy data to the \CRANpkg{tidyverse} [@Wickham2019], the **tidyverts** suite features `tsibble` as the foundational data structure, in order to build a fluid and fluent pipeline for time series analysis. Besides \CRANpkg{tsibble}, the \CRANpkg{feasts} [@R-feasts] and \CRANpkg{fable} [@R-fable] packages fill the role of statistical analysis and forecasting in the **tidyverts** ecosystem. When time series analysis starts taking off, series of interest denoted by the `key` variables often remain unchanged over the course of analysis, from trend inspection to forecasting performance.
 
 Figure \ref{fig:highlight-retail-1} gives an overview of 152 series for the retail data using an overlaid time series plot, while Figure \ref{fig:highlight-retail-2} presents a scatterplot, where each series is represented by a dot in the feature space (trend versus seasonal strength). The plot making of Figure \ref{fig:highlight-retail-2} is aided with the `features()` function from \CRANpkg{feasts}, which summarises original data by each series down to various statistical features. This function along with other **tidyverts** functions is `tsibble`-aware, and outputs a table in a reduced form where each row corresponds to a series, thus graphically displayed as Figure \ref{fig:highlight-retail-2}.
 
@@ -66,9 +60,9 @@ Figure \ref{fig:highlight-retail} highlights not only a series with strongest se
 
 The R community has a long-standing contribution to interactive visualisation systems in abundance. These systems can be roughly divided into two classes: ones with web technology and the others without.
 
-R \CRANpkg{shiny} and \CRANpkg{htmlwidgets} lay a fundamental infrastructure in marrying R with HTML elements and Javascript for interactivity, although they do not emphasise on interactive graphics. The \CRANpkg{htmlwidgets} package opens a door to embedding Javascript libraries into R such that users are able to write only R code to generate web-based plots. Many Javascript charting libraries have been ported to R as HTML widgets, including \CRANpkg{plotly}, \CRANpkg{rbokeh}, and \CRANpkg{leaflet} for maps. To enable interactions between different widgets, it can be achieved with \CRANpkg{shiny} or \CRANpkg{crosstalk}. The \CRANpkg{crosstalk} extends \CRANpkg{htmlwidgets} with shared R6 instances to support linked brushing and filtering across widgets.
+R \CRANpkg{shiny} [@R-shiny] and \CRANpkg{htmlwidgets} [@R-htmlwidgets] lay a fundamental infrastructure in marrying R with HTML elements and Javascript for interactivity, although they do not emphasise on interactive graphics. The \CRANpkg{htmlwidgets} package opens a door to embedding Javascript libraries into R such that users are able to write only R code to generate web-based plots. Many Javascript charting libraries have been ported to R as HTML widgets, including \CRANpkg{plotly} [@plotly2020], \CRANpkg{rbokeh} [@R-rbokeh], and \CRANpkg{leaflet} [@R-leaflet] for maps. To enable interactions between different widgets, it can be achieved with \CRANpkg{shiny} or \CRANpkg{crosstalk} [@R-crosstalk]. The \CRANpkg{crosstalk} extends \CRANpkg{htmlwidgets} with shared R6 instances to support linked brushing and filtering across widgets, without relying on \CRANpkg{shiny}.
 
-If not using web technology, two examples are provided here: \CRANpkg{loon} based on Tcl/Tk and \CRANpkg{cranvas} based on Qt. They offer a wide array of pre-defined interactions, such as selecting and zooming, to manipulate plots via mouse, keyboard strokes, and menus. The \CRANpkg{cranvastime} is an add-on of \CRANpkg{cranvas}, which develops a set of novel interactions for temporal data, for example wrapping and mirroring.
+If not using web technology, two examples are provided here: \CRANpkg{loon} [@R-loon] based on Tcl/Tk and \pkg{cranvas} [@xie_reactive_2014] based on Qt. They offer a wide array of pre-defined interactions, such as selecting and zooming, to manipulate plots via mouse, keyboard strokes, and menus. The \pkg{cranvastime} package [@cheng_enabling_2016] is an add-on of \pkg{cranvas}, which develops a set of novel interactions for temporal data, for example wrapping and mirroring.
 
 # Interactivity for coordinated views via shared temporal data
 
@@ -78,7 +72,7 @@ As opposed to one-to-one linking, \CRANpkg{tsibbletalk} defaults to categorical 
 
 To incorporate structured specifications in the `key`, a symbolic formula can be passed to the `spec` argument. Adopting Wilkinson notations for factorial models [@Wilkinson1973], the `spec` follows the `/` and `*` operators tradition to declare nesting and crossing variables respectively. The `spec` for the `aus_retail` data is therefore specified as `State * Industry` or `Industry * State`, which is the default for the presence of multiple `key` variables. If there is a hierarchy in the data, using `/` is required to indicate the parent-child relation, as strictly one direction `parent/child`.
 
-The `tourism_monthly` dataset packaged in \CRANpkg{tsibbletalk}, contains monthly domestic overnight trips across Australia, to give an illustrator of nesting and crossing. The `key` is comprised of three identifying variables: `State`, `Region`, and `Purpose` (of trip), in particular `State` nesting of `Region`, together crossed with `Purpose`. This specification can be translated as follows:
+The `tourism_monthly` dataset [@tourism] packaged in \CRANpkg{tsibbletalk}, contains monthly domestic overnight trips across Australia, to give an illustrator of nesting and crossing. The `key` is comprised of three identifying variables: `State`, `Region`, and `Purpose` (of trip), in particular `State` nesting of `Region`, together crossed with `Purpose`. This specification can be translated as follows:
 
 ```{r tourism-shared, echo = TRUE}
 ```
@@ -124,11 +118,11 @@ include_graphics("img/wrap-1.png")
 include_graphics("img/wrap-7.png")
 ```
 
-The city of Melbourne has sensors installed to count hourly tallies of pedestrians in order to capture downtown daily rhythms (cite). Figure \ref{fig:wrap-ped} shows the first five months of 2020 foot traffic at four locations, with the depiction of three pronounced slices in time. Figure \ref{fig:wrap-ped-1} unfolds all counts from January to May on their absolute time line, facetted by four sensors. On March 16, Melbourne went to the stage three lockdown due to COVID-19, seeing a significant decline in traffic volume across the city. These lines are then folded into daily and weekly sections, shown as Figure \ref{fig:wrap-ped-2} and \ref{fig:wrap-ped-3} respectively. Seasonal variations have been popped out to viewers, complementing the not-just-magnitude-drop story. The pre-lockdown period is coloured with dark green and lockdown with orange.
+The city of Melbourne has sensors installed to count hourly tallies of pedestrians in order to capture downtown daily rhythms [@ped]. Figure \ref{fig:wrap-ped} shows the first five months of 2020 foot traffic at four locations, with the depiction of three pronounced slices in time. Figure \ref{fig:wrap-ped-1} unfolds all counts from January to May on their absolute time line, facetted by four sensors. On March 16, Melbourne went to the stage three lockdown due to COVID-19, seeing a significant decline in traffic volume across the city. These lines are then folded into daily and weekly sections, shown as Figure \ref{fig:wrap-ped-2} and \ref{fig:wrap-ped-3} respectively. Seasonal variations have been popped out to viewers, complementing the not-just-magnitude-drop story. The pre-lockdown period is coloured with dark green and lockdown with orange.
 
 The wrapping procedure involves slicing time indices into seasonal periods of interest and their corresponding time dices. For example, hourly pedestrian data can be decomposed into 24-hour blocks grouped by all respective days, like Figure \ref{fig:wrap-ped-2}. Figure \ref{fig:wrap-ped} suggests that there could be more than one eye-catching slices out of many possible combinations, and thus repeated wrappings can be unwieldy. To visually locate an interesting slice, the \CRANpkg{tsibbletalk} package implements a shiny module, a pair of UI and server functions, to automate this wrapping procedure.
 
-This shiny module, decoupled to `tsibbleDiceUI()` and `tsibbleDiceServer()`, presents a clean interface and forms a resusable piece in a shiny application. A shiny module provides the vehicle in modularising shiny applications for both users and developers. Like all shiny modules, the first argument in both functions requires a user-supplied session id that must be unique. The UI function `tsibbleDiceUI()` simply shows a slider that animates or controls the number of periods to be diced. The workhorse is certainly the server function `tsibbleDiceServer()`, encapsulating the algorithm that transforms data and sends messages to update the plot accordingly. The `plot` argument expects a `ggplot` or `plotly` object, where one can plot data using either lines or other graphical elements (such as boxplots). As the function name suggests, a (shared) tsibble is needed to start the engine, and thereby the time `index` can be retrieved for dissection. The `period` option semantically takes a desired number of seasonal periods to be shifted, for example data shifted by "1 day", "2 days", or "1 week", etc. In other words, the `period` defines the grind level. As for date-times (represented by `POSIXt`), it ranges from from fine "day" to coarse "year". The following code snippet generates Figure \ref{fig:wrap-ped}.
+This shiny module, decoupled to `tsibbleWrapUI()` and `tsibbleWrapServer()`, presents a clean interface and forms a resusable piece in a shiny application. A shiny module provides the vehicle in modularising shiny applications for both users and developers. Like all shiny modules, the first argument in both functions requires a user-supplied session id that must be unique. The UI function `tsibbleWrapUI()` simply shows a slider that animates or controls the number of periods to be diced. The workhorse is certainly the server function `tsibbleWrapServer()`, encapsulating the algorithm that transforms data and sends messages to update the plot accordingly. The `plot` argument expects a `ggplot` or `plotly` object, where one can plot data using either lines or other graphical elements (such as boxplots). As the function name suggests, a (shared) tsibble is needed to start the engine, and thereby the time `index` can be retrieved for dissection. The `period` option semantically takes a desired number of seasonal periods to be shifted, for example data shifted by "1 day", "2 days", or "1 week", etc. In other words, the `period` defines the grind level. As for date-times (represented by `POSIXt`), it ranges from from fine "day" to coarse "year". The following code snippet generates Figure \ref{fig:wrap-ped}.
 
 ```{r load-ped, eval = FALSE}
 ```
@@ -145,3 +139,10 @@ The new shiny module exploits the temporal aspect for a tsibble object. It allow
 # Conclusions and discussions
 
 # References
+
+```{r pkg-bib, eval = FALSE}
+pkgs <- c("tsibbledata", "feasts", "fable", "shiny", "htmlwidgets", "plotly",
+  "rbokeh", "leaflet", "crosstalk", "loon")
+write_bib(pkgs, "rpkgs.bib")
+```
+
