@@ -11,20 +11,26 @@ temporal data of nesting and crossing structures, and discover
 interesting periodic/aperiodic slices. This package implements a shared
 \texttt{tsibble} object that allows for linked brushing for coordinated
 views, and a shiny module that aids in wrapping time lines for seasonal
-patterns. The basic usage of functions is demonstrated in the article,
-with data examples.
+patterns. Basic usage of functions is demonstrated in the article, with
+data examples.
 }
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-\begin{itemize}
-\tightlist
-\item
-  An ensemble of graphics
-\item
-  Accelerate the exploratory data visualisation process
-\end{itemize}
+A group of cohesive observational units measured over time typically
+form one temporal data set. Ensemble graphics
+\citep{unwin_ensemble_2018} that bundle multi-views for a data set
+together, are essential for exploring and mining temporal data in
+multi-facets. Adding interactivity, such as linked brushing via common
+observations and wrapping by time, can accelerate this process.
+
+There are a plenty of R packages, but few
+
+This article demonstrates basic usage of the \CRANpkg{tsibbletalk}
+package with temporal data applications for linked views and time
+wrapping, proceeded by brief reviews of temporal data structure and
+interactive graphics.
 
 \hypertarget{background-tidy-temporal-data-and-workflow}{%
 \section{Background: tidy temporal data and
@@ -120,11 +126,11 @@ into two classes: ones with web technology and the others without.
 
 R \CRANpkg{shiny} \citep{R-shiny} and \CRANpkg{htmlwidgets}
 \citep{R-htmlwidgets} lay a fundamental infrastructure in marrying R
-with HTML elements and Javascript for interactivity, although they
+with HTML elements and JavaScript for interactivity, although they
 seldom emphasise on interactive graphics. The \CRANpkg{htmlwidgets}
-package opens a door to embedding Javascript libraries into R such that
+package opens a door to embedding JavaScript libraries into R such that
 users are able to write only R code to generate web-based plots. Many
-Javascript charting libraries have been ported to R as HTML widgets,
+JavaScript charting libraries have been ported to R as HTML widgets,
 including \CRANpkg{plotly} \citep{plotly2020}, \CRANpkg{rbokeh}
 \citep{R-rbokeh}, and \CRANpkg{leaflet} \citep{R-leaflet} for maps. To
 enable interactions between different widgets, it can be achieved with
@@ -371,9 +377,9 @@ tsibble is needed to start the engine, and thereby the time
 option semantically takes a desired number of seasonal periods to be
 shifted, for example data shifted by ``1 day'', ``2 days'', or ``1
 week'', etc. In other words, the \texttt{period} defines the grind
-level. For date-times (represented by \texttt{POSIXt}), the adjustment
-ranges from from fine ``day'' to coarse ``year''. The following code
-snippet generates Figure \ref{fig:wrap-ped}.
+level. For date-times (represented by \texttt{POSIXt}), the granularity
+ranges from fine ``day'' to coarse ``year''. The following code snippet
+generates Figure \ref{fig:wrap-ped}.
 
 \begin{Schunk}
 \begin{Sinput}
@@ -405,26 +411,28 @@ themselves.
 In response to the slider input, the plot will be updated and loaded
 with newly transformed data. At its core, keeping the application as
 performant as possible is the top priority. Without completely redrawing
-the plot, the \texttt{plotly.js} react method is invoked internally. The
-underlying tsibble data is being called back and processed in R. Only
-transformed data gets fed back to the shiny server, along with reseting
-the x-axis ranges and breaks. The rest plot configurations, such as
-marks, y-axes, and layouts, are properly cached.
+the plot, the \texttt{plotlyProxy()} react method is invoked internally
+for talking to shiny. The underlying tsibble data is being called back
+and processed in R. Only transformed data gets fed back to the shiny
+server, along with reseting the x-axis ranges and breaks. The rest plot
+configurations, such as marks, y-axes, and layouts, are properly cached.
 
 The new shiny module exploits the temporal aspect for a tsibble object.
 It allows users to slide through relative periods to explore seasonal
 insights, with slick user experience.
 
-\hypertarget{conclusions-and-discussions}{%
-\section{Conclusions and
-discussions}\label{conclusions-and-discussions}}
+\hypertarget{summary}{%
+\section{Summary}\label{summary}}
+
+Close to the heart of the \CRANpkg{tsibbletalk} package is blending the
+best bits from \CRANpkg{tsibble} and \CRANpkg{crosstalk}.
 
 \bibliography{tsibbletalk.bib}
 
 \address{%
 Earo Wang\\
 The University of Auckland\\%
-Auckland, New Zealand\\
+Department of Statistics\\
 %
 %
 %
@@ -434,7 +442,7 @@ Auckland, New Zealand\\
 \address{%
 Dianne Cook\\
 Monash University\\%
-Melbourne, Australia\\
+Department of Econometrics and Business Statistics\\
 %
 %
 %
