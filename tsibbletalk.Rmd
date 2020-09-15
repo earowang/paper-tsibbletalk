@@ -42,7 +42,7 @@ read_chunk("scripts/pedestrian.R")
 
 # Introduction
 
-A group of cohesive observational units measured over time typically form one temporal data set. Ensemble graphics [@unwin_ensemble_2018] that bundle multi-views for a data set together, are essential for exploring and mining temporal data in multi-facets. Adding interactivity, such as linked brushing via common observations and wrapping by time, can accelerate this process.
+A group of cohesive observational units measured over time typically form one temporal data set. Ensemble graphics [@unwin_ensemble_2018] that bundle multi-views for a data set together, are essential for exploring and mining many different aspects of temporal data. Adding interactivity, such as linked brushing via common observations and wrapping by time, can accelerate this process.
 
 There are a plenty of R packages, but few
 
@@ -146,7 +146,7 @@ The new shiny module exploits the temporal aspect for a tsibble object. It allow
 
 # Summary
 
-Close to the heart of the \CRANpkg{tsibbletalk} package is blending the best bits from \CRANpkg{tsibble} and \CRANpkg{crosstalk}.
+Close to the heart of the \CRANpkg{tsibbletalk} package is blending the best bits from \CRANpkg{tsibble}, \CRANpkg{crosstalk}, and \CRANpkg{plotly}.
 
 # References
 
