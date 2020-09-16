@@ -1,6 +1,6 @@
 % !TeX root = RJwrapper.tex
-\title{Conversations in time: interactive visualisation to explore
-structured temporal data}
+\title{Conversations in time: interactive visualisation to explore structured
+temporal data}
 \author{by Earo Wang and Dianne Cook}
 
 \maketitle
@@ -23,9 +23,7 @@ form one temporal data set. Ensemble graphics
 \citep{unwin_ensemble_2018} that bundle multi-views for a data set
 together, are essential for exploring and mining many different aspects
 of temporal data. Adding interactivity, such as linked brushing via
-common observations and wrapping by time, can accelerate this process.
-
-There are a plenty of R packages, but few
+shared observations and wrapping by time, can accelerate this process.
 
 This article demonstrates basic usage of the \CRANpkg{tsibbletalk}
 package with temporal data applications for linked views and time
@@ -327,7 +325,7 @@ quarter or one day.
 \begin{Schunk}
 \begin{figure}
 
-{\centering \subfloat[Initial overview state\label{fig:wrap-ped-1}]{\includegraphics[width=\textwidth]{img/wrap-0} }\newline\subfloat[1-day state\label{fig:wrap-ped-2}]{\includegraphics[width=\textwidth]{img/wrap-1} }\newline\subfloat[7-day state\label{fig:wrap-ped-3}]{\includegraphics[width=\textwidth]{img/wrap-7} }
+{\centering \subfloat[Initial overview state\label{fig:wrap-ped-1}]{\includegraphics[width=\textwidth]{img/wrap-0} }\newline\subfloat[1-day state\label{fig:wrap-ped-2}]{\includegraphics[width=\textwidth]{img/wrap-1} }\newline\subfloat[7-day state, anchoring to Monday\label{fig:wrap-ped-3}]{\includegraphics[width=\textwidth]{img/wrap-7} }
 
 }
 
@@ -355,7 +353,7 @@ hourly pedestrian data can be decomposed into 24-hour blocks grouped by
 all respective days, like Figure \ref{fig:wrap-ped-2}. Figure
 \ref{fig:wrap-ped} suggests that there could be more than one
 eye-catching slices out of many possible combinations, and thus repeated
-wrappings can be unwieldy. To visually locate an interesting slice, the
+wrappings can be unwieldy. To visually locate a salient slice, the
 \CRANpkg{tsibbletalk} package implements a shiny module, a pair of UI
 and server functions, to automate this wrapping procedure.
 
@@ -417,9 +415,10 @@ and processed in R. Only transformed data gets fed back to the shiny
 server, along with reseting the x-axis ranges and breaks. The rest plot
 configurations, such as marks, y-axes, and layouts, are properly cached.
 
-The new shiny module exploits the temporal aspect for a tsibble object.
-It allows users to slide through relative periods to explore seasonal
-insights, with slick user experience.
+The new shiny module exploits the temporal aspect for a tsibble object,
+exposed by the \texttt{index} attribute. It allows users to slide
+through relative periods to digest seasonal behaviours, with slick user
+experience.
 
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
@@ -437,8 +436,12 @@ hierarchical and categorical linking between multi-views from one shared
 tsibble.
 
 A new shiny module, \texttt{tsibbleWrapUI()} and
-\texttt{tsibbleWrapServer()}, provides a lens for exploring temporal
-aspects for a \texttt{tsibble}, in particular seasonal variations.
+\texttt{tsibbleWrapServer()}, provides a lens for looking at temporal
+aspects for a \texttt{tsibble}, in particular seasonal or cyclical
+variations. The slicing and dicing technique efficiently wrap time lines
+for user-defined plots. The \texttt{plotlyProxy()} react method makes it
+possible to send wrapped data to the server and amend the plot straight
+way.
 
 \bibliography{tsibbletalk.bib}
 
@@ -461,3 +464,4 @@ Department of Econometrics and Business Statistics\\
 %
 \\\href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}
 }
+
