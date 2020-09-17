@@ -39,9 +39,9 @@ read_chunk("scripts/pedestrian.R")
 
 # Introduction
 
-A group of cohesive observational units measured over time typically form one temporal data set. Ensemble graphics [@unwin_ensemble_2018] that bundle multi-views for a data set together, are essential for exploring and mining many different aspects of temporal data. Adding interactivity, such as linked brushing via shared observations and wrapping by time, can accelerate this process.
+Temporal data typically arrives as a set of many observational units measured over time. Some variables may be categorical, indicating a hierarchy in the collection process, that may be measurements taken in different geographic regions, or types of products sold by the one company. Exploring these multiple features can be daunting. Ensemble graphics [@unwin_ensemble_2018] bundle multiple views of a data set together into one composite figure. These provide an effective approach for exploring and digesting many different aspects of temporal data. Adding interactivity to the ensemble can greatly enhance the exploration process. 
 
-This article demonstrates basic usage of the \CRANpkg{tsibbletalk} package with temporal data applications for linked views and time wrapping, proceeded by brief reviews of temporal data structure and interactive graphics. 
+This article describes new software, the \CRANpkg{tsibbletalk} package, for exploring temporal data using linked views and time wrapping. The next section provides some background to the approach based on setting up data structures and workflow. The section following explains the mechanism for constructing interactivity, to link between multiple hiearchical data objects and hence plots. The section after this describes the set up for interactively slicing and dicing time to wrap a series on itself to investigate periodicities. 
 
 # Background: tidy temporal data and workflow
 
