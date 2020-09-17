@@ -133,7 +133,7 @@ This shiny module, decoupled to `tsibbleWrapUI()` and `tsibbleWrapServer()`, pre
 ```{r ped-slice, echo = TRUE, eval = FALSE}
 ```
 
-Upon running the shiny application, Figure \ref{fig:wrap-ped-1} corresponds to the initial state, with the slider incremented by 1-day unit. The "play" button near the end of slider begins animating the slicing and dicing process by walking through all 24 hours by 153 days. Alternatively, users can drag the handler to poke around certain slices themselves.
+Upon running the shiny application, Figure \ref{fig:wrap-ped-1} corresponds to the initial state, with the slider incremented by 1-day unit. The "play" button near the end of slider begins animating the slicing and dicing process by walking through all 24 hours by 152 days. Alternatively, users can drag the handler to poke around certain slices themselves.
 
 In response to the slider input, the plot will be updated and loaded with newly transformed data. At its core, keeping the application as performant as possible is the top priority. Without completely redrawing the plot, the `plotlyProxy()` react method is invoked internally for talking to shiny. The underlying tsibble data is being called back and processed in R. Only transformed data gets fed back to the shiny server, along with reseting the x-axis ranges and breaks. The rest plot configurations, such as marks, y-axes, and layouts, are properly cached.
 
