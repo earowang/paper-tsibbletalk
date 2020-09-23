@@ -67,9 +67,13 @@ R \CRANpkg{shiny} [@R-shiny] and \CRANpkg{htmlwidgets} [@R-htmlwidgets] provides
 
 Systems without the web technology include \CRANpkg{loon} [@R-loon], based on Tcl/Tk, and \pkg{cranvas} [@xie_reactive_2014] based on Qt. They offer a wide array of pre-defined interactions, such as selecting and zooming, to manipulate plots via mouse action, keyboard strokes, and menus. The \pkg{cranvastime} package [@cheng_enabling_2016] is an add-on to \pkg{cranvas}, which provides specialised interactions for temporal data, such as wrapping and mirroring.
 
-# Interactivity for coordinated views via shared temporal data
+The techniques implemented in work described in this paper utilise web technology.
 
-The \CRANpkg{tsibbletalk} package, inspired by the \CRANpkg{crosstalk} package, introduces a shared tsibble instance on top of a `tsibble` to allow for frictionless communication between different plots for temporal data. The `as_shared_tsibble()` function provides an entry point in the integrated flow, turning a `tsibble` to a shared instance (i.e. `SharedTsibbleData` subclassing of `SharedData` from \CRANpkg{crosstalk}) that powers data transmission across multiple views. The \CRANpkg{tsibbletalk} package aims to streamline interactive graphical analysis with the focus of temporal and structured linking.
+# Using a shared temporal data object for interactivity
+
+The \CRANpkg{tsibbletalk} package introduces a shared tsibble instance built on a `tsibble`. This allows for seamless communication between different plots of temporal data. The `as_shared_tsibble()` function turns a `tsibble` into a shared instance,  `SharedTsibbleData`, which is a subclass of `SharedData` from \CRANpkg{crosstalk}). This is the object driving data transmission across multiple views. The \CRANpkg{tsibbletalk} package aims to streamline interactive exploration of temporal data, with the focus of temporal elements and structured linking.
+
+## Linking between plots
 
 As opposed to one-to-one linking, \CRANpkg{tsibbletalk} defaults to categorical linking where marking one or more observations in one category will broadcast to all other observations in this category. Given time series plots, click any data point on a line, highlighting the whole line as a result. The `as_shared_tsibble()` uses `tsibble`'s `key` variables to achieve these types of linking, and the `spec` argument takes one step further in constructing hybrid linking, for example hierarchical and categorical linking. For example, each series in the `aus_retail` data corresponds to all possible combinations of the `State` and `Industry` variables. They are intrinsically crossed with each other. If one variable is nested within another, this lends itself to a hierarchical structure, like geographical hierarchy. Such collection of inter-related time series are referred to as hierarchical and grouped time series in the literature [@fpp].
 
@@ -111,7 +115,7 @@ Since all plots are stemmed from one shared tsibble data source, they are self-l
 
 In summary, shared tsibble data nicely bridges between the \CRANpkg{crosstalk} and **tidyverts** ecosystems for temporal data over their common term "key". The `as_shared_tsibble()` provides a symbolic user interface for effortless construction of a hybrid of hierarchical and categorical linkings. And the `plotly_key_tree()` in turn decodes the specification to plot a tree for data overview and navigation, accompanied with more detailed plots.
 
-# Slicing and dicing time
+## Slicing and dicing time
 
 The shared tsibble data leverages the `key` attribute to converse with many coordinated views, with or without \CRANpkg{shiny}. On the other hand, a second critical attribute--`index`--lays the foundational temporal context that augments the conversation. When temporal data are plotted and stretched against the entire span like Figure \ref{fig:highlight-retail-1}, it puts emphasis on the trend perception. Yet to digest periodic/aperiodic patterns, data should be wrapped over relative time units that are origin-less, such as one quarter or one day.
 

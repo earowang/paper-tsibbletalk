@@ -162,20 +162,26 @@ plots via mouse action, keyboard strokes, and menus. The
 \pkg{cranvas}, which provides specialised interactions for temporal
 data, such as wrapping and mirroring.
 
-\hypertarget{interactivity-for-coordinated-views-via-shared-temporal-data}{%
-\section{Interactivity for coordinated views via shared temporal
-data}\label{interactivity-for-coordinated-views-via-shared-temporal-data}}
+The techniques implemented in work described in this paper utilise web
+technology.
 
-The \CRANpkg{tsibbletalk} package, inspired by the \CRANpkg{crosstalk}
-package, introduces a shared tsibble instance on top of a
-\texttt{tsibble} to allow for frictionless communication between
-different plots for temporal data. The \texttt{as\_shared\_tsibble()}
-function provides an entry point in the integrated flow, turning a
-\texttt{tsibble} to a shared instance (i.e.~\texttt{SharedTsibbleData}
-subclassing of \texttt{SharedData} from \CRANpkg{crosstalk}) that powers
-data transmission across multiple views. The \CRANpkg{tsibbletalk}
-package aims to streamline interactive graphical analysis with the focus
-of temporal and structured linking.
+\hypertarget{using-a-shared-temporal-data-object-for-interactivity}{%
+\section{Using a shared temporal data object for
+interactivity}\label{using-a-shared-temporal-data-object-for-interactivity}}
+
+The \CRANpkg{tsibbletalk} package introduces a shared tsibble instance
+built on a \texttt{tsibble}. This allows for seamless communication
+between different plots of temporal data. The
+\texttt{as\_shared\_tsibble()} function turns a \texttt{tsibble} into a
+shared instance, \texttt{SharedTsibbleData}, which is a subclass of
+\texttt{SharedData} from \CRANpkg{crosstalk}). This is the object
+driving data transmission across multiple views. The
+\CRANpkg{tsibbletalk} package aims to streamline interactive exploration
+of temporal data, with the focus of temporal elements and structured
+linking.
+
+\hypertarget{linking-between-plots}{%
+\subsection{Linking between plots}\label{linking-between-plots}}
 
 As opposed to one-to-one linking, \CRANpkg{tsibbletalk} defaults to
 categorical linking where marking one or more observations in one
@@ -326,7 +332,7 @@ tree for data overview and navigation, accompanied with more detailed
 plots.
 
 \hypertarget{slicing-and-dicing-time}{%
-\section{Slicing and dicing time}\label{slicing-and-dicing-time}}
+\subsection{Slicing and dicing time}\label{slicing-and-dicing-time}}
 
 The shared tsibble data leverages the \texttt{key} attribute to converse
 with many coordinated views, with or without \CRANpkg{shiny}. On the
