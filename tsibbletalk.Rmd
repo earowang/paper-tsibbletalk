@@ -99,24 +99,31 @@ include_graphics("img/tourism-linking.png")
 ```{r plotly-key-tree, echo = TRUE}
 ```
 
-The tree plot provides the data skeleton, upon which the rest of data can be attached. In this example, small multiples of line plots are placed at the top right of Figure \ref{fig:tourism-linking-fig} to explore the temporal trend across regions, by trip purpose. The shared tsibble data can be directly piped into \CRANpkg{ggplot2} code as follows:
+The tree plot provides the graphics skeleton, upon which the rest of data plots can be attached. In this example, small multiples of line plots are placed at the top right of Figure \ref{fig:tourism-linking-fig} to explore the temporal trend across regions, by trip purpose. The shared tsibble data can be directly piped into \CRANpkg{ggplot2} code to create this.
 
 ```{r tourism-series, echo = TRUE, eval = FALSE}
 ```
 
-To tease apart these overlaid time series, they are funnelled through the `features()` S3 method to extract some key characteristics, including the measurements of trend and seasonality. A scatterplot is populated from these statistics for each series.
+These line plots are heavily overplotted. To tease apart structure in the multiple time series, the `features()` function `fabletools` computes interesting characteristics, including the measures of trend and seasonality. These are displayed in the scatterplot at bottom right, where one dot represents one series.
 
 ```{r tourism-scatter, echo = TRUE, eval = FALSE}
 ```
 
-Lastly, three graphics are composed as an ensemble of coordinated views for multi-facetted exploration, shown as Figure \ref{fig:tourism-linking-fig} (the interactive realisation of Figure \ref{fig:highlight-retail}). Routine functions bring about new interaction with temporal data on the client side.
+There is one final step, to compose the three plots into an ensemble of coordinated views for exploration, shown in Figure \ref{fig:tourism-linking-fig}.  (This is the interactive realisation of Figure \ref{fig:highlight-retail}). <!-- Routine functions bring about new interaction with temporal data on the client side.-->
 
 ```{r tourism-multi, echo = TRUE, eval = FALSE}
 ```
 
-Since all plots are stemmed from one shared tsibble data source, they are self-linking views. Nodes, lines, and points are hoverable and clickable. Given the `spec`, clicking either one element in any plot highlights all points that match the `Region` category, briefly "categorical linking". In Figure \ref{fig:tourism-linking-fig}, when hovering and selecting the circle associated with "Sydney" in the scatter plot, all data records with shared values of "Sydney" listen and react to this interaction via self updating in red. In order for comparison with other regions or states, press the "Shift" key to enable persistent selection, and simultaneously select the parent node on the tree, saying "Western Australia", to include all the children by switching to the blue colour. The domestic tourism sees Sydney as one of the most popular destinations in realm of business and friends visiting over years. Despite of relatively weaker performance in Western Australia, Australia's North West region sees the strongest upward trend, bypassing Sydney in some years.
+Since all plots are created from one shared tsibble data source, they are self-linking views. Nodes, lines, and points are hoverable and clickable. Given the `spec`, clicking either one element in any plot highlights all points that match the `Region` category, that is, categorical linking. Figure \ref{fig:tourism-linking-fig} is a static view of an interactive exploration. The steps in getting to this point were:
 
-In summary, shared tsibble data nicely bridges between the \CRANpkg{crosstalk} and **tidyverts** ecosystems for temporal data over their common term "key". The `as_shared_tsibble()` provides a symbolic user interface for effortless construction of a hybrid of hierarchical and categorical linkings. And the `plotly_key_tree()` in turn decodes the specification to plot a tree for data overview and navigation, accompanied with more detailed plots.
+1. A branch of the tree corresponding to Western Australia was first selected. (The names of the regions are a little odd, which is a quirk of the data set, but all four areas, Australia's South West, ...., correspond to tourist destinations in Western Australia. Hovering over the node on the branch brings up the state name.) This generated the response in the line plots and the scatterplot that colored corresponding time series and points as blue. 
+2. To enable persistent selection, in oder to compare regions or states, "Shift" and click on the tree was done, after switching the colour to red. This generated the response that points and time series corresponding to Sydney were highlighted in red. 
+3. Hovering over the points brings up the label for Sydney.
+
+<!-- In Figure \ref{fig:tourism-linking-fig}, when hovering and selecting the circle associated with "Sydney" in the scatter plot, all data records with shared values of "Sydney" listen and react to this interaction via self updating in red. In order for comparison with other regions or states, press the "Shift" key to enable persistent selection, and simultaneously select the parent node on the tree, saying "Western Australia", to include all the children by switching to the blue colour.-->
+The domestic tourism sees Sydney as one of the most popular destinations in realm of business and friends visiting over the years. Despite the relatively weaker performance in Western Australia, Australia's North West region sees a strongest upward trend in Business, bypassing Sydney in some years.
+
+In summary, shared the tsibble data nicely bridges between the \CRANpkg{crosstalk} and **tidyverts** ecosystems for temporal data using the common "key". The `as_shared_tsibble()` provides a symbolic user interface for effortless construction of a hybrid of hierarchical and categorical linking between plots. The `plotly_key_tree()` fuction, in turn, decodes the hierarchical specification to plot a tree for data overview and navigation, when accompanied by more detailed plots.
 
 ## Slicing and dicing time
 
