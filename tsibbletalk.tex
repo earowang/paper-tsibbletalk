@@ -46,25 +46,26 @@ series on itself to investigate periodicities.
 \section{Background: tidy temporal data and
 workflow}\label{background-tidy-temporal-data-and-workflow}}
 
-The \CRANpkg{tsibble} package \citep{wang2020tsibble} introduces a
+The \CRANpkg{tsibble} package \citep{wang2020tsibble} introduced a
 unified temporal data structure, referred to as a \texttt{tsibble}, to
 represent time series and longitudinal data in a tidy format
-\citep{wickham2014tidy}. That said, a \texttt{tsibble} extends the
-\texttt{data.frame} and \CRANpkg{tibble} classes with temporally
+\citep{wickham2014tidy}. A \texttt{tsibble} extends the
+\texttt{data.frame} and \CRANpkg{tibble} classes with the temporal
 contextual metadata: \texttt{index} and \texttt{key}. The \texttt{index}
 declares a data column that holds time-related indices. The \texttt{key}
 identifies a collection of related series or panels observed over the
-\texttt{index}-defined period, which can comprise multiple columns.
-Below displays the monthly Australian retail trade turnover data
-(\texttt{aus\_retail}), available in the \CRANpkg{tsibbledata} package
-\citep{R-tsibbledata}. The \texttt{Month} column holds year-months as
-\texttt{index}. The \texttt{State} together with \texttt{Industry} are
-the identifiers for these 152 series, highlighted as \texttt{key}. Note
-that the column \texttt{Series\ ID} could be an alternative option for
-setting up \texttt{key}, but \texttt{State} and \texttt{Industry} are
-more readable and informative. The \texttt{index} and \texttt{key} are
-``sticky'' columns to a \texttt{tsibble}, forming critical pieces for
-fluent temporal data analysis later.
+\texttt{index}-defined period, which can comprise multiple columns. An
+example of a \texttt{tsibble} can be found in the monthly Australian
+retail trade turnover data (\texttt{aus\_retail}), available in the
+\CRANpkg{tsibbledata} package \citep{R-tsibbledata}, shown below. The
+\texttt{Month} column holds year-months as the \texttt{index}.
+\texttt{State} and \texttt{Industry}, together, are the identifiers for
+these 152 series, which form the \texttt{key}. Note that the column
+\texttt{Series\ ID} could be an alternative option for setting up the
+\texttt{key}, but \texttt{State} and \texttt{Industry} are more readable
+and informative. The \texttt{index} and \texttt{key} are ``sticky''
+columns to a \texttt{tsibble}, forming critical pieces for fluent
+downstream temporal data analysis.
 
 \begin{Schunk}
 \begin{Soutput}
@@ -81,28 +82,30 @@ fluent temporal data analysis later.
 \end{Soutput}
 \end{Schunk}
 
-In the spirit of tidy data to the \CRANpkg{tidyverse}
+In the spirit of tidy data from the \CRANpkg{tidyverse}
 \citep{Wickham2019}, the \textbf{tidyverts} suite features
-\texttt{tsibble} as the foundational data structure, in order to build a
-fluid and fluent pipeline for time series analysis. Besides
+\texttt{tsibble} as the foundational data structure, and helps to build
+a fluid and fluent pipeline for time series analysis. Besides
 \CRANpkg{tsibble}, the \CRANpkg{feasts} \citep{R-feasts} and
 \CRANpkg{fable} \citep{R-fable} packages fill the role of statistical
-analysis and forecasting in the \textbf{tidyverts} ecosystem. When time
-series analysis starts taking off, series of interest denoted by the
-\texttt{key} variables often remain unchanged over the course of
-analysis, from trend inspection to forecasting performance.
+analysis and forecasting in the \textbf{tidyverts} ecosystem. During all
+the steps of a time series analysis, the series of interest, denoted by
+the \texttt{key} variable, typically persist, through the trend modeling
+and also forecasting. We would typically want to examine the series
+across all of the keys.
 
-Figure \ref{fig:highlight-retail-1} gives an overview of 152 series for
-the retail data using an overlaid time series plot, while Figure
-\ref{fig:highlight-retail-2} presents a scatterplot, where each series
-is represented by a dot in the feature space (trend versus seasonal
-strength). The plot making of Figure \ref{fig:highlight-retail-2} is
-aided with the \texttt{features()} function from \CRANpkg{feasts}, which
-summarises original data by each series down to various statistical
-features. This function along with other \textbf{tidyverts} functions is
+Figure \ref{fig:highlight-retail} illustrates examining temporal data
+with many keys. The data has 152 series coorresponding to different
+items in retail data. The multiple series are displayed using an
+overlaid time series plot, along with a scatterplot of two variables
+(trend versus seasonal strength) from feature space, where each series
+is represented by a dot. The feature space is computed using the
+\texttt{features()} function from \CRANpkg{feasts}, which summarises the
+original data for each series using various statistical features. This
+function along with other \textbf{tidyverts} functions is
 \texttt{tsibble}-aware, and outputs a table in a reduced form where each
-row corresponds to a series, thus graphically displayed as Figure
-\ref{fig:highlight-retail-2}.
+row corresponds to a series, which can be graphically displayed as in
+Figure \ref{fig:highlight-retail-2}.
 
 \begin{Schunk}
 \begin{figure}
@@ -115,17 +118,18 @@ row corresponds to a series, thus graphically displayed as Figure
 \end{figure}
 \end{Schunk}
 
-Figure \ref{fig:highlight-retail} highlights not only a series with
-strongest seasonality, but also a need to querying interesting series on
-the fly. Without interactivity, one needs to first filter the
-interesting series out from the features table, and join back to the
-original \texttt{tsibble} in order to examine its trend in relation to
-others. This procedure can soon grow cumbersome if many series to be
-discovered. Despite that the two plots are static, they can be
-considered as linked views via the common \texttt{key} variables between
-two tables. This motivates enabling interactivity of \texttt{tsibble}
-and \texttt{tsibble}-derived objects for rapid exploratory data
-analysis.
+Figure \ref{fig:highlight-retail} has also been highlighted to focus on
+the one series with the strongest seasonality. To create this
+highlighting, one needs to first filter the interesting series from the
+features table, and join back to the original \texttt{tsibble} in order
+to examine its trend in relation to others. This procedure can soon grow
+cumbersome if many series are to be explored. It illustrates a need to
+query interesting series on the fly. Although these two plots are
+static, we can consider them as linked views becaause the common
+\texttt{key} variables link between the two data tables producing the
+two ploots. This motivates the work in this package, described in this
+paper, to enable interactivity of \texttt{tsibble} and
+\texttt{tsibble}-derived objects for rapid exploratory data analysis.
 
 \hypertarget{overview-of-interactivity}{%
 \section{Overview of interactivity}\label{overview-of-interactivity}}
