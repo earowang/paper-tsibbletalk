@@ -90,7 +90,7 @@ To illustrate nesting and crossing we use the `tourism_monthly` dataset [@touris
 ```{r load-other-pkgs}
 ```
 
-```{r tourism-linking-fig, fig.cap = "Coordinated views generated from the \\code{tourism\\_shared} with persistent linked brushing."}
+```{r tourism-linking-fig, fig.cap = "Snapshot of exploring an ensemble of linked plots of the Australian tourism data, built on a \\code{tourism\\_shared} object. It also illustrates persistent linked brushing to compare two groups."}
 include_graphics("img/tourism-linking.png")
 ```
 
