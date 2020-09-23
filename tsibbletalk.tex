@@ -241,12 +241,12 @@ tourism_shared <- tourism_monthly %>%
 \end{figure}
 \end{Schunk}
 
-There is a three-level hierarchy: the root node is implicitly Australia,
-and geographically disaggregated to states and lower-level tourism
-regions. A new handy function \texttt{plotly\_key\_tree()} has been
-implemented to help explore the hierarchy. It interprets hierarchies in
-the shared tsibble's \texttt{spec} as a tree view, built with
-\CRANpkg{plotly}. The following code line produces the linked tree
+\noindent There is a three-level hierarchy: the root node is implicitly
+Australia, and geographically disaggregated to states and lower-level
+tourism regions. A new handy function \texttt{plotly\_key\_tree()} has
+been implemented to help explore the hierarchy. It interprets
+hierarchies in the shared tsibble's \texttt{spec} as a tree view, built
+with \CRANpkg{plotly}. The following code line produces the linked tree
 diagram (left panel of Figure \ref{fig:tourism-linking-fig}). The visual
 for the tree hierarchy detangles a group of related series and provides
 a bird's eye view of the data organisation.
@@ -257,11 +257,12 @@ p_l <- plotly_key_tree(tourism_shared, height = 1100, width = 800)
 \end{Sinput}
 \end{Schunk}
 
-The tree plot provides backbones of the data, and much flesh yet to be
-attached. Small multiples of time series lines are composed and placed
-at the top right of Figure \ref{fig:tourism-linking-fig} to unpack the
-temporal trend across regions by purposes of trips. The shared tsibble
-data can be directly piped into \CRANpkg{ggplot2} code.
+The tree plot provides the data skeleton, upon which the rest of data
+can be attached. In this example, small multiples of line plots are
+placed at the top right of Figure \ref{fig:tourism-linking-fig} to
+explore the temporal trend across regions, by trip purpose. The shared
+tsibble data can be directly piped into \CRANpkg{ggplot2} code as
+follows.
 
 \begin{Schunk}
 \begin{Sinput}
