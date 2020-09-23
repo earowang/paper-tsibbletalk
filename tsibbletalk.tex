@@ -184,39 +184,43 @@ linking.
 \subsection{Linking between plots}\label{linking-between-plots}}
 
 As opposed to one-to-one linking, \CRANpkg{tsibbletalk} defaults to
-categorical linking where marking one or more observations in one
-category will broadcast to all other observations in this category.
-Given time series plots, click any data point on a line, highlighting
-the whole line as a result. The \texttt{as\_shared\_tsibble()} uses
-\texttt{tsibble}'s \texttt{key} variables to achieve these types of
-linking, and the \texttt{spec} argument takes one step further in
-constructing hybrid linking, for example hierarchical and categorical
-linking. For example, each series in the \texttt{aus\_retail} data
-corresponds to all possible combinations of the \texttt{State} and
-\texttt{Industry} variables. They are intrinsically crossed with each
-other. If one variable is nested within another, this lends itself to a
-hierarchical structure, like geographical hierarchy. Such collection of
-inter-related time series are referred to as hierarchical and grouped
-time series in the literature \citep{fpp}.
+categorical variable linking where selecting one or more observations in
+one category will broadcast to all other observations in this category.
+In addition, linking is also by time: within the time series plot, click
+on any data point, and whole line will be highlighted in response. The
+\texttt{as\_shared\_tsibble()} uses \texttt{tsibble}'s \texttt{key}
+variables to achieve these types of linking.
 
-To incorporate structured specifications in the \texttt{key}, a symbolic
-formula can be passed to the \texttt{spec} argument. Adopting Wilkinson
-notations for factorial models \citep{Wilkinson1973}, the \texttt{spec}
-follows the \texttt{/} and \texttt{*} operators tradition to declare
-nesting and crossing variables respectively. The \texttt{spec} for the
-\texttt{aus\_retail} data is therefore specified as
-\texttt{State\ *\ Industry} or \texttt{Industry\ *\ State}, which is the
-default for the presence of multiple \texttt{key} variables. If there is
-a hierarchy in the data, using \texttt{/} is required to indicate the
-parent-child relation, as strictly one direction \texttt{parent/child}.
+The approach can also accommodate hierarchical temporal data. When one
+key variable is nested within another, such as regional areas within a
+state, this is considered to be a hierarchical structure. These time
+series are referred to as hierarchical and grouped time series in the
+literature \citep{fpp}. The \texttt{aus\_retail} above is an example.
+Each series in the data corresponds to all possible combinations of the
+\texttt{State} and \texttt{Industry} variables, which means they are
+intrinsically crossed with each other.
 
-The \texttt{tourism\_monthly} dataset \citep{tourism} packaged in
-\CRANpkg{tsibbletalk}, contains monthly domestic overnight trips across
-Australia, to give an illustrator of nesting and crossing. The
-\texttt{key} is comprised of three identifying variables:
-\texttt{State}, \texttt{Region}, and \texttt{Purpose} (of trip), in
-particular \texttt{State} nesting of \texttt{Region}, together crossed
-with \texttt{Purpose}. This specification can be translated as follows:
+The \texttt{spec} argument in \texttt{as\_shared\_tsibble()}
+constructing hybrid linking, that incorporates hierarchical and
+categorical linking. A symbolic formula can be passed to the
+\texttt{spec} argument, to incorporate structured specifications in the
+\texttt{key}. Adopting \citet{Wilkinson1973}'s notation for factorial
+models, the \texttt{spec} follows the \texttt{/} and \texttt{*} operator
+conventions to declare nesting and crossing variables, respectively. The
+\texttt{spec} for the \texttt{aus\_retail} data is therefore specified
+as \texttt{State\ *\ Industry} or \texttt{Industry\ *\ State}, which is
+the default for the presence of multiple \texttt{key} variables. If
+there is a hierarchy in the data, using \texttt{/} is required to
+indicate the parent-child relation, for a strictly one directional
+\texttt{parent/child}.
+
+To illustrate nesting and crossing we use the \texttt{tourism\_monthly}
+dataset \citep{tourism} packaged in \CRANpkg{tsibbletalk}. It contains
+monthly domestic overnight trips across Australia. The \texttt{key} is
+comprised of three identifying variables: \texttt{State},
+\texttt{Region}, and \texttt{Purpose} (of trip), in particular
+\texttt{State} nesting of \texttt{Region}, together crossed with
+\texttt{Purpose}. This specification can be translated as follows:
 
 \begin{Schunk}
 \begin{Sinput}
@@ -237,17 +241,15 @@ tourism_shared <- tourism_monthly %>%
 \end{figure}
 \end{Schunk}
 
-This dataset contains a three-level hierarchy: the root node is
-implicitly Australia, and geographically disaggregated to states and
-lower-level tourism regions. A new handy function
-\texttt{plotly\_key\_tree()} has been implemented to address the need of
-hierarchical discovery arising from the data. It interprets hierarchies
-in the shared tsibble's \texttt{spec} as a tree view, built with
+There is a three-level hierarchy: the root node is implicitly Australia,
+and geographically disaggregated to states and lower-level tourism
+regions. A new handy function \texttt{plotly\_key\_tree()} has been
+implemented to help explore the hierarchy. It interprets hierarchies in
+the shared tsibble's \texttt{spec} as a tree view, built with
 \CRANpkg{plotly}. The following code line produces the linked tree
-diagram and spans the left panel of Figure
-\ref{fig:tourism-linking-fig}. The visual of tree hierarchy untangles a
-group of related series and snapshots the data organisation from a
-bird's eye view.
+diagram (left panel of Figure \ref{fig:tourism-linking-fig}). The visual
+for the tree hierarchy detangles a group of related series and provides
+a bird's eye view of the data organisation.
 
 \begin{Schunk}
 \begin{Sinput}
