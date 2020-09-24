@@ -474,21 +474,21 @@ experience.
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
 
-Close to the heart of the \CRANpkg{tsibbletalk} package is blending the
-best bits from \CRANpkg{tsibble}, \CRANpkg{crosstalk}, \CRANpkg{plotly},
-and \CRANpkg{shiny}.
+At the heart of the \CRANpkg{tsibbletalk} package is a blending the best
+bits from \CRANpkg{tsibble}, \CRANpkg{crosstalk}, \CRANpkg{plotly}, and
+\CRANpkg{shiny}.
 
 The \texttt{as\_shared\_tsibble()} turns a \texttt{tsibble} object to a
 shared data class, with an option to express any nesting and crossing
 structures from the \texttt{key} attribute. If nesting is found in the
 data, the \texttt{plotly\_key\_tree()} creates an interactive
 hierarchical tree to help with data overview. This sets the stage for
-hierarchical and categorical linking between multi-views from one shared
-tsibble.
+hierarchical and categorical linking between multiple views from one
+shared tsibble.
 
 A new shiny module, \texttt{tsibbleWrapUI()} and
 \texttt{tsibbleWrapServer()}, provides a lens for looking at temporal
-aspects for a \texttt{tsibble}, in particular seasonal or cyclical
+aspects of a \texttt{tsibble}, in particular seasonal or cyclical
 variations. The slicing and dicing technique efficiently wrap time lines
 for user-defined plots. The \texttt{plotlyProxy()} react method makes it
 possible to send wrapped data to the server and amend the plot straight
