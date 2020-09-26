@@ -357,7 +357,7 @@ accompanied by more detailed plots.
 
 An important aspect of temporal data is the time context. Time has
 cyclical structure, that may correspond to seasonal patterns to be
-discovered. The \texttt{index} component of the shared tsibble data
+discovered. The \texttt{index} component of the (shared) tsibble data
 forms the basis for exploring seasonality. To investigate for periodic
 or aperiodic patterns, series should be wrapped on themselves, where the
 index is broken into temporal components like quarter or day. We shall
@@ -370,7 +370,7 @@ explore this with pedestrian traffic in Melbourne, Australia.
 
 }
 
-\caption[Snapshots wrapping after slicing the \code{pedestrian20} data at different intervals, none (top), daily (middle) and weekly (bottom)]{Snapshots wrapping after slicing the \code{pedestrian20} data at different intervals, none (top), daily (middle) and weekly (bottom). This type of interaction is made possible with Shiny elements.}\label{fig:wrap-ped}
+\caption[Snapshots wrapping after slicing the \code{pedestrian20} data at different intervals, (a) none, (b) daily and (c) weekly]{Snapshots wrapping after slicing the \code{pedestrian20} data at different intervals, (a) none, (b) daily and (c) weekly. This type of interaction is made possible with Shiny elements.}\label{fig:wrap-ped}
 \end{figure}
 \end{Schunk}
 
@@ -380,14 +380,14 @@ of the downtown \citep{ped}. Figure \ref{fig:wrap-ped} shows the first
 five months of 2020 foot traffic at four different locations, for three
 different time slices, daily, weekly and full five months. Plot
 \ref{fig:wrap-ped-1} shows hourly counts from January to May on an
-absolute time line, facetted by location. The stage 3 COVID-19 lockdown,
-on March 16, is marked by a change of colour. (The pre-lockdown period
-is coloured with dark green and lockdown with orange.) We can see a
-significant decline in foot traffic at all four locations. QV Market is
-less affected probably because this is a major produce market, an
-essential service that continued to operate. Bourke St, a major shopping
-center, sees a gradual uptick in the last weeks of the period indicating
-that people were getting back into the shops.
+absolute time line, facetted by locations. The stage 3 COVID-19
+lockdown, on March 16, is marked by a change of colour. (The
+pre-lockdown period is coloured with dark green and lockdown with
+orange.) We can see a significant decline in foot traffic at all four
+locations. QV Market is less affected probably because this is a major
+produce market, an essential service that continued to operate. Bourke
+St, a major shopping center, sees a gradual uptick in the last weeks of
+the period indicating that people were getting back into the shops.
 
 Figure \ref{fig:wrap-ped-2} and \ref{fig:wrap-ped-3} show slicing and
 wrapping of the series into daily and weekly sections, respectively.
