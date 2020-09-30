@@ -1,6 +1,6 @@
 Type: Compendium
-Package: paper-tsibbletalk
-Version: 0.0.0.9000
+Package: paper.tsibbletalk
+Version: 1.0
 Authors@R: 
     person(given = "Earo",
            family = "Wang",
@@ -9,15 +9,19 @@ Authors@R:
 URL: https://github.com/earowang/paper-tsibbletalk/issues
 BugReports: https://github.com/earowang/paper-tsibbletalk/issues
 Depends:
+    feasts (>= 0.1.5),
+    gghighlight (>= 0.3.0),
+    ggrepel (>= 0.8.2),
+    lubridate (>= 1.7.9),
+    plotly (>= 4.9.2.1),
     R (>= 3.2),
-    tidyverse (>= 1.2.1)
+    rwalkr (>= 0.5.3),
+    shiny (>= 1.5.0),
+    tidyverse (>= 1.2.1),
+    tsibble (>= 0.9.2),
+    tsibbledata (>= 0.2.0),
+    tsibbletalk (>= 0.1.0)
 Imports:
-    bookdown (>= 0.9),
-    here,
-    knitr (>= 1.22),
-    MonashEBSTemplates (>= 0.2),
-    spelling (>= 2.1)
-Remotes:
-    robjhyndman/MonashEBSTemplates
+    rticles (>= 0.16)
 Encoding: UTF-8
 Language: en-GB
