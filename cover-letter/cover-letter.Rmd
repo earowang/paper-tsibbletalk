@@ -1,0 +1,23 @@
+---
+from: Earo Wang
+fromqualifications: PhD (Statistics)
+fromtitle: Lecturer in Statistics
+fromWWW: earo.me
+fromemail: earo.wang@auckland.ac.nz
+fromphone: +64 9 923 9692
+fromsignature: signature.png
+toname: Editor
+toaddress: The R Journal
+opening: Dear Dr Michael Kane,
+closing: Sincerely
+spacing: 1.4
+output: UOARmdTemplates::letter
+---
+
+Please consider our manuscript titled, "Conversations in time: interactive visualisation to explore structured temporal data" for publication in the R Journal.
+
+This paper describes a new R package, **tsibbletalk**, for interactively exploring temporal data of nesting and crossing structures using linked views and time wrapping. It implements a shared tsibble data class to allow for linked brushing between html widgets on both client and server sides. It also provides a shiny module to wrap time lines for revealing periodic or aperiodic patterns.
+
+We discuss **tsibbletalk** functions to easily build linked and dynamic graphics for temporal data, and include code examples using two contemporary data applications. The paper is written in RMarkdown, which contains the R code to reproduce the results.
+
+We believe that this manuscript is a good fit for the R Journal, because it features novel implementation and nimble user experience in R.
