@@ -1,0 +1,33 @@
+ This paper describes a useful contribution of an add-on package for R in the area of interactive graphics, an area which is generally lacking. The main revisions I would like to see are:
+1. Better commenting of code and some tests and error handling in the package.
+2. I would like to see the paper discuss the implementation of the linking a little more. It is good to demonstrate the usefulness of the package through examples, but the need for linked graphics and brushing is already well established. The main contribution here is surely that you have developed a way to link tsibble objects using the not-so-very-well-known R6 class. A little section on this would make the paper so much more useful to fellow R developers.
+
+Overview:
+
+I think this is a useful contribution to the R community and I can see a wide range of R users finding immediate applications with their own data and analyses. I think the approach is sensible and appropriate to the task of linking graphics.
+
+Article:
+
+Within the article, I would like to see more discussion of the actual linking implementation. I believe the package is using the R6 class and creating a subclass of SharedData from 'crosstalk', but it would be nice to see this explained within the article itself. A little note on why this is the preferred solution would also be of interest to readers.
+
+The code snippets lack library calls or the package::function_in_package format, for reproducibility.
+
+I like the examples in general. The chosen datasets are interesting examples of time series data and showcase the 'tsibbletalk' package well.
+
+In the "Overview of interactivity", no mention is made of the non-web-based interactivity made available by the 'grDevices' package (https://protect-au.mimecast.com/s/xMG5CGv0kQtJA4DNh7AMnU?domain=github.com).
+
+Package:
+
+The package code could benefit from more comments in general.
+
+The package ends up with a huge number of dependencies on a clean install. Is it possible to reduce this? I fully realise that 'tsibbletalk' depends on a reasonably small number of packages directly, and it is the dependencies of the dependencies which really mount up.
+
+On a similar note, does this really need to be a new package, rather than a new feature in the 'tsibble' package? If it only adds linking functionality to tsibble objects (rather than dataframes/objects in general), it would seem to me to be more like a feature to be added to 'tsibble'. I am not a member of the CRAN police, but the R developer community must always share the responsibility of reducing the burden on the CRAN team and check farms et cetera, if at all possible. If there is a worry about introducing more imports/dependencies to 'tsibble', the new feature could be made optional with the 'tsibbletalk' dependencies in Suggests.
+
+The as_shared_tsibble() function is likely to be frequently used, particularly in an interactive or experimental way. Perhaps, it should have some more user-friendly error handling. For example, the function does not check if x is a tsibble object. If the supplied x is an integer, the code breaks with the message:
+
+Error in UseMethod("key_vars") : no applicable method for 'key_vars' applied to an object of class "c('integer', 'numeric')"
+
+This error message is not very helpful! I would hope for a simple message saying the function expects a tsibble. I have not looked for other instances where error handling may be beneficial, but I would ask that other similar exported functions be improved with some basic error handling.
+
+There are no tests in the package. This is always tricky with interactive functionality, but there must be some other functionality in the package worth testing and controlling.
