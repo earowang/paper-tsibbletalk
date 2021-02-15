@@ -2,7 +2,6 @@
 library(rwalkr)
 library(tsibble)
 library(tsibbletalk)
-library(shiny)
 library(plotly)
 library(tidyverse)
 library(lubridate)
@@ -16,6 +15,7 @@ pedestrian20 <- melb_walk_fast(year = 2020, sensor = sensors) %>%
   as_tsibble(index = Date_Time, key = Sensor)
 
 ## ---- ped-slice
+library(shiny)
 p_line <- pedestrian20 %>%
   ggplot(aes(x = Date_Time, y = Count, colour = Lockdown)) +
   geom_line(size = .3) +

@@ -8,36 +8,40 @@ output:
 fontfamily: mathpazo
 ---
 
-We thank the Editor and reviewers for their comments which have improved this paper. The point by point description of changes are below: the reviewers' comments are in red and our response is in black.
+We thank the reviewers for their comments which have improved this paper. The point by point description of changes are below: the reviewers' comments are in red and our response is in black.
 
 # Reviewer 1 comments {-}
 
-> Bottom of page 8: "Figure 3 peels the tidy module with" I'm not sure about the use of the word peels there?
+> Please mention that tidyverts also contains the tsibbletalk package
 
-We replaced "peels" with "reveals".
+The tidyverts only contains {tsibble}, {fable}, and {feasts}. The {tsibbletalk} packages is NOT part of the tidyverts suite.
 
-> Top of page 9: "The rigidity of tsibble, as the fundamental data infrastructure, warrants the validity of temporal data analysis for the later stage." Should "warrants" be replaced with "ensures" and perhaps replace "temporal data analysis for the later stage" with "subsequent temporal data analysis".
+> The sentence "The techniques implemented in work described in this paper utilise web technology." could be more specific. One fix could include moving the sentence in the Summary section "At the heart of the tsibbletalk package is a blending of the best bits from tsibble, crosstalk, plotly, and shiny." to an earlier section in the paper.
+
+Thanks. Done.
+
+> In the section "Linking between plots" you write "... linking is by time, ...". It seems to me that linking is by key, so all time series points associated to a particular key are linked.
+
+Yes. We corrected from "by time" to "by key variables".
+
+> The phrasing "to allow for structured specifications in the key" is unclear. It would be better to be more explicit saying that it is to define the crossing and/or nesting relationships among the key variables.
 
 Done.
+
+> The phrasing "user-supplied session id" is wrong, a session means something very particular in shiny whereas the id argument if a module takes an id string (that should not be repeated in the same shiny namespace).
+
+Thanks. We corrected "user-supplied session id" to "user-supplied id string".
 
 # Reviewer 2 comments {-}
 
-> P4 L59 and the enhancements of -> and the enhancements by
+> Within the article, I would like to see more discussion of the actual linking implementation. I believe the package is using the R6 class and creating a subclass of SharedData from 'crosstalk', but it would be nice to see this explained within the article itself. A little note on why this is the preferred solution would also be of interest to readers
 
 Done.
 
-> P6 L34. Second item missing full stop at the end.
+> The code snippets lack library calls or the package::function_in_package format, for reproducibility.
 
-Done.
+Thanks. Added missing {ggplot2}, {plotly}, {shiny}, and {feasts} library calls in the code snippets.
 
-> I think for Figure 4, you should mention that supplementary figure contains the gif if the animation does not work or perhaps include a link to a working animation.
+> In the "Overview of interactivity", no mention is made of the non-web-based interactivity made available by the 'grDevices' package (https://protect-au.mimecast.com/s/xMG5CGv0kQtJA4DNh7AMnU?domain=github.com).
 
-Thanks. We added a sentence in Figure 4 caption "The animations are available with the supplementary materials online, and can also be viewed directly at <https://github.com/earowang/paper-tsibble/blob/master/img/animate-1.gif>."
-
-> P15 L58. Mention `future_*` is from `furrr` package.
-
-Done. 
-
-> P16 L24. Missing reference for `lubridate`.
-
-Done.
+We added the mention of {grDevices} in the "Overview of interactivity" section: "Systems without the web technology include grDevices ...".

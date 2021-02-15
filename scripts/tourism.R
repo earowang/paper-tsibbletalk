@@ -3,16 +3,11 @@ library(tsibbletalk)
 tourism_shared <- tourism_monthly %>% 
   as_shared_tsibble(spec = (State / Region) * Purpose)
 
-## ---- load-other-pkgs
-library(feasts)
-library(plotly)
-library(ggplot2)
-library(tsibble)
-
 ## ---- plotly-key-tree
 p_l <- plotly_key_tree(tourism_shared, height = 1100, width = 800)
 
 ## ---- tourism-series
+library(ggplot2)
 p_tr <- tourism_shared %>%
   ggplot(aes(x = Month, y = Trips)) +
   geom_line(aes(group = Region), alpha = .5, size = .4) +
@@ -20,6 +15,7 @@ p_tr <- tourism_shared %>%
   scale_x_yearmonth(date_breaks = "5 years", date_labels = "%Y")
 
 ## ---- tourism-scatter
+library(feasts)
 tourism_feat <- tourism_shared %>%
   features(Trips, feat_stl)
 p_br <- tourism_feat %>%
@@ -27,6 +23,7 @@ p_br <- tourism_feat %>%
   geom_point(aes(group = Region), alpha = .8, size = 2)
 
 ## ---- tourism-multi
+library(plotly)
 subplot(p_l,
   subplot(
     ggplotly(p_tr, tooltip = "Region", width = 1100),
