@@ -69,7 +69,7 @@ The techniques implemented in work described in this paper utilise web technolog
 
 # Using a shared temporal data object for interactivity
 
-The \CRANpkg{tsibbletalk} package introduces a shared tsibble instance built on a `tsibble`. This allows for seamless communication between different plots of temporal data. The `as_shared_tsibble()` function turns a `tsibble` into a shared instance,  `SharedTsibbleData`, which is a subclass of `SharedData` from \CRANpkg{crosstalk}. This is the object driving data transmission across multiple views. The \CRANpkg{tsibbletalk} package aims to streamline interactive exploration of temporal data, with the focus of temporal elements and structured linking.
+The \CRANpkg{tsibbletalk} package introduces a shared tsibble instance built on a `tsibble`. This allows for seamless communication between different plots of temporal data. The `as_shared_tsibble()` function turns a `tsibble` into a shared instance,  `SharedTsibbleData`, which is a subclass of `SharedData` from \CRANpkg{crosstalk}. This is an R6 object driving data transmission across multiple views, due to its mutable and lightweight properties. The \CRANpkg{tsibbletalk} package aims to streamline interactive exploration of temporal data, with the focus of temporal elements and structured linking.
 
 ## Linking between plots
 

@@ -177,10 +177,11 @@ built on a \texttt{tsibble}. This allows for seamless communication
 between different plots of temporal data. The
 \texttt{as\_shared\_tsibble()} function turns a \texttt{tsibble} into a
 shared instance, \texttt{SharedTsibbleData}, which is a subclass of
-\texttt{SharedData} from \CRANpkg{crosstalk}. This is the object driving
-data transmission across multiple views. The \CRANpkg{tsibbletalk}
-package aims to streamline interactive exploration of temporal data,
-with the focus of temporal elements and structured linking.
+\texttt{SharedData} from \CRANpkg{crosstalk}. This is an R6 object
+driving data transmission across multiple views, due to its mutable and
+lightweight properties. The \CRANpkg{tsibbletalk} package aims to
+streamline interactive exploration of temporal data, with the focus of
+temporal elements and structured linking.
 
 \hypertarget{linking-between-plots}{%
 \subsection{Linking between plots}\label{linking-between-plots}}

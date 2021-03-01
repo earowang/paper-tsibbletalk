@@ -8,13 +8,17 @@ output:
 fontfamily: mathpazo
 ---
 
-We thank the reviewers for their comments which have improved this paper. The point by point description of changes are below: the reviewers' comments are in red and our response is in black.
+We thank the reviewers for their comments which have improved this paper. 
+
+I've incorporated all feedback from reviewers regarding the package, except for adding unit tests. I'd like to include unit tests for code quality, but as far as I know, it's tricky to enable unit tests for interactive graphics.
+
+Regarding the article, the point by point description of changes are below: the reviewers' comments are in red and our response is in black.
 
 # Reviewer 1 comments {-}
 
 > Please mention that tidyverts also contains the tsibbletalk package
 
-The tidyverts only contains {tsibble}, {fable}, and {feasts}. The {tsibbletalk} packages is NOT part of the tidyverts suite.
+The core tidyverts only contains {tsibble}, {fable}, and {feasts}. The {tsibbletalk} packages is NOT part of the tidyverts suite.
 
 > The sentence "The techniques implemented in work described in this paper utilise web technology." could be more specific. One fix could include moving the sentence in the Summary section "At the heart of the tsibbletalk package is a blending of the best bits from tsibble, crosstalk, plotly, and shiny." to an earlier section in the paper.
 
@@ -36,7 +40,7 @@ Thanks. We corrected "user-supplied session id" to "user-supplied id string".
 
 > Within the article, I would like to see more discussion of the actual linking implementation. I believe the package is using the R6 class and creating a subclass of SharedData from 'crosstalk', but it would be nice to see this explained within the article itself. A little note on why this is the preferred solution would also be of interest to readers
 
-Done.
+The actual linking is done through 'crosstalk'. We don't implement the linking rather than subclassing of its R6 object. I've added a note on why we prefer 'crosstalk' (or R6) as "This is an R6 object driving data transmission across multiple views, due to its mutable and lightweight properties." in the first paragraph of the section "Using a shared temporal data object for interactivity".
 
 > The code snippets lack library calls or the package::function_in_package format, for reproducibility.
 
