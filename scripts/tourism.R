@@ -1,4 +1,5 @@
 ## ---- tourism-shared
+library(tsibble)
 library(tsibbletalk)
 tourism_shared <- tourism_monthly %>% 
   as_shared_tsibble(spec = (State / Region) * Purpose)

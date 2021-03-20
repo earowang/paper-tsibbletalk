@@ -228,6 +228,7 @@ comprised of three identifying variables: \texttt{State},
 
 \begin{Schunk}
 \begin{Sinput}
+library(tsibble)
 library(tsibbletalk)
 tourism_shared <- tourism_monthly %>% 
   as_shared_tsibble(spec = (State / Region) * Purpose)
@@ -435,7 +436,8 @@ data shifted by ``1 day'', ``2 days'', or ``1 week'', etc. In other
 words, the \texttt{period} defines the grind level. For date-times
 (represented by \texttt{POSIXt}), the granularity ranges from fine
 ``day'' to a much coarser ``year''. The following code snippet generates
-Figure \ref{fig:wrap-ped}.
+Figure \ref{fig:wrap-ped}. The creation of the \texttt{pedestrian20}
+data is available in supplementary R files.
 
 \begin{Schunk}
 \begin{Sinput}
