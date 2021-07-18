@@ -1,5 +1,5 @@
 % !TeX root = RJwrapper.tex
-\title{Conversations in time: interactive visualisation to explore
+\title{Conversations in time: interactive visualization to explore
 structured temporal data}
 \author{by Earo Wang and Dianne Cook}
 
@@ -8,16 +8,16 @@ structured temporal data}
 \abstract{%
 Temporal data often has a hierarchical structure, defined by categorical
 variables describing different levels, such as political regions or
-sales products. Nesting of categorical variables produces a hierarchical
-structure. The \CRANpkg{tsibbletalk} package is developed to allow a
-user to interactively explore temporal data, relative to the nested or
-crossed structures. It can help to discover differences between category
-levels, and uncover interesting periodic or aperiodic slices. The
-package implements a shared \texttt{tsibble} object that allows for
-linked brushing between coordinated views, and a shiny module that aids
-in wrapping time lines for seasonal patterns. The tools are demonstrated
-using two data examples: domestic tourism in Australia and pedestrian
-traffic in Melbourne.
+sales products. The nesting of categorical variables produces a
+hierarchical structure. The \CRANpkg{tsibbletalk} package is developed
+to allow a user to interactively explore temporal data, relative to the
+nested or crossed structures. It can help to discover differences
+between category levels, and uncover interesting periodic or aperiodic
+slices. The package implements a shared \texttt{tsibble} object that
+allows for linked brushing between coordinated views, and a shiny module
+that aids in wrapping timelines for seasonal patterns. The tools are
+demonstrated using two data examples: domestic tourism in Australia and
+pedestrian traffic in Melbourne.
 }
 
 \hypertarget{introduction}{%
@@ -26,12 +26,12 @@ traffic in Melbourne.
 Temporal data typically arrives as a set of many observational units
 measured over time. Some variables may be categorical, containing a
 hierarchy in the collection process, that may be measurements taken in
-different geographic regions, or types of products sold by the one
-company. Exploring these multiple features can be daunting. Ensemble
-graphics \citep{unwin_ensemble_2018} bundle multiple views of a data set
-together into one composite figure. These provide an effective approach
-for exploring and digesting many different aspects of temporal data.
-Adding interactivity to the ensemble can greatly enhance the exploration
+different geographic regions, or types of products sold by one company.
+Exploring these multiple features can be daunting. Ensemble graphics
+\citep{unwin_ensemble_2018} bundle multiple views of a data set together
+into one composite figure. These provide an effective approach for
+exploring and digesting many different aspects of temporal data. Adding
+interactivity to the ensemble can greatly enhance the exploration
 process.
 
 This paper describes new software, the \CRANpkg{tsibbletalk} package,
@@ -136,9 +136,9 @@ paper, to enable interactivity of \texttt{tsibble} and
 \hypertarget{overview-of-interactivity}{%
 \section{Overview of interactivity}\label{overview-of-interactivity}}
 
-There is a long history of interactive data visualisation research and
+There is a long history of interactive data visualization research and
 corresponding systems. Within R, the systems can be roughly divided into
-systems utilising web technology and those that don't.
+systems utilizing web technology and those that do not.
 
 R \CRANpkg{shiny} \citep{R-shiny} and \CRANpkg{htmlwidgets}
 \citep{R-htmlwidgets} provide infrastructure connecting R with HTML
@@ -161,11 +161,11 @@ Systems without the web technology include \CRANpkg{grDevices},
 pre-defined interactions, such as selecting and zooming, to manipulate
 plots via mouse action, keyboard strokes, and menus. The
 \pkg{cranvastime} package \citep{cheng_enabling_2016} is an add-on to
-\pkg{cranvas}, which provides specialised interactions for temporal
+\pkg{cranvas}, which provides specialized interactions for temporal
 data, such as wrapping and mirroring.
 
-The techniques implemented in work described in this paper utilise web
-technology, including \CRANpkg{crosstalk}, \CRANpkg{plotly}, and R
+The techniques implemented in the work described in this paper utilize
+web technology, including \CRANpkg{crosstalk}, \CRANpkg{plotly}, and R
 \CRANpkg{shiny}.
 
 \hypertarget{using-a-shared-temporal-data-object-for-interactivity}{%
@@ -187,12 +187,12 @@ temporal elements and structured linking.
 \subsection{Linking between plots}\label{linking-between-plots}}
 
 As opposed to one-to-one linking, \CRANpkg{tsibbletalk} defaults to
-categorical variable linking where selecting one or more observations in
-one category will broadcast to all other observations in this category.
-That is, linking is by key variables: within the time series plot, click
-on any data point, and whole line will be highlighted in response. The
-\texttt{as\_shared\_tsibble()} uses \texttt{tsibble}'s \texttt{key}
-variables to achieve these types of linking.
+categorical variable linking, where selecting one or more observations
+in one category will broadcast to all other observations in this
+category. That is, linking is by key variables: within the time series
+plot, click on any data point, and the whole line will be highlighted in
+response. The \texttt{as\_shared\_tsibble()} uses \texttt{tsibble}'s
+\texttt{key} variables to achieve these types of linking.
 
 The approach can also accommodate temporal data of nesting and crossing
 structures. These time series are referred to as hierarchical and
@@ -222,8 +222,8 @@ To illustrate nesting and crossing we use the \texttt{tourism\_monthly}
 dataset \citep{tourism} packaged in \CRANpkg{tsibbletalk}. It contains
 monthly domestic overnight trips across Australia. The \texttt{key} is
 comprised of three identifying variables: \texttt{State},
-\texttt{Region}, and \texttt{Purpose} (of trip), in particular
-\texttt{State} nesting of \texttt{Region}, together crossed with
+\texttt{Region}, and \texttt{Purpose} (of the trip), in particular
+\texttt{State} nesting of \texttt{Region}, crossed together with
 \texttt{Purpose}. This specification can be translated as follows:
 
 \begin{Schunk}
@@ -247,14 +247,14 @@ tourism_shared <- tourism_monthly %>%
 \end{Schunk}
 
 \noindent There is a three-level hierarchy: the root node is implicitly
-Australia, and geographically disaggregated to states and lower-level
+Australia, geographically disaggregated to states, and lower-level
 tourism regions. A new handy function \texttt{plotly\_key\_tree()} has
 been implemented to help explore the hierarchy. It interprets
 hierarchies in the shared tsibble's \texttt{spec} as a tree view, built
 with \CRANpkg{plotly}. The following code line produces the linked tree
 diagram (left panel of Figure \ref{fig:tourism-linking-fig}). The visual
 for the tree hierarchy detangles a group of related series and provides
-a bird's eye view of the data organisation.
+a bird's eye view of the data organization.
 
 \begin{Schunk}
 \begin{Sinput}
@@ -262,12 +262,12 @@ p_l <- plotly_key_tree(tourism_shared, height = 1100, width = 800)
 \end{Sinput}
 \end{Schunk}
 
-The tree plot provides the graphics skeleton, upon which the rest of
+The tree plot provides the graphics skeleton, upon which the rest of the
 data plots can be attached. In this example, small multiples of line
 plots are placed at the top right of Figure
 \ref{fig:tourism-linking-fig} to explore the temporal trend across
-regions, by trip purpose. The shared tsibble data can be directly piped
-into \CRANpkg{ggplot2} code to create this.
+regions by the trip purpose. The shared tsibble data can be directly
+piped into \CRANpkg{ggplot2} code to create this.
 
 \begin{Schunk}
 \begin{Sinput}
@@ -283,7 +283,7 @@ p_tr <- tourism_shared %>%
 These line plots are heavily overplotted. To tease apart structure in
 the multiple time series, the \texttt{features()} function computes
 interesting characteristics, including the measures of trend and
-seasonality. These are displayed in the scatterplot at bottom right,
+seasonality. These are displayed in the scatterplot at the bottom right,
 where one dot represents one series.
 
 \begin{Schunk}
@@ -299,7 +299,7 @@ p_br <- tourism_feat %>%
 
 There is one final step, to compose the three plots into an ensemble of
 coordinated views for exploration, shown in Figure
-\ref{fig:tourism-linking-fig}. (This is the interactive realisation of
+\ref{fig:tourism-linking-fig}. (This is the interactive realization of
 Figure \ref{fig:highlight-retail}).
 
 \begin{Schunk}
@@ -332,27 +332,27 @@ point were:
   of the data set, but all four areas, Australia's South West, \ldots.,
   correspond to tourist destinations in Western Australia. Hovering over
   the node on the branch brings up the state name.) This generated the
-  response in the line plots and the scatterplot that coloured
+  response in the line plots and the scatterplot that colored
   corresponding time series and points as blue.
 \item
   To enable persistent selection, in oder to compare regions or states,
-  ``Shift'' and click on the tree was done, after switching the colour
-  to red. This generated the response that points and time series
+  ``Shift'' and click on the tree was done, after switching the color to
+  red. This generated the response that points and time series
   corresponding to Sydney were highlighted in red.
 \item
   Hovering over the points brings up the label for Sydney.
 \end{enumerate}
 
-The domestic tourism sees Sydney as one of the most popular destinations
-in realm of business and friends visiting over the years. Despite the
+Domestic tourism sees Sydney as one of the most popular destinations in
+the realm of business and friends visiting over the years. Despite the
 relatively weaker performance in Western Australia, Australia's North
-West region sees a strongest upward trend in Business, bypassing Sydney
+West region sees a strongest upward trend in business, bypassing Sydney
 in some years.
 
 In summary, shared tsibble data nicely bridges between the
 \CRANpkg{crosstalk} and \textbf{tidyverts} ecosystems for temporal data
 using the common ``key''. The \texttt{as\_shared\_tsibble()} provides a
-symbolic user interface for effortless construction of a hybrid of
+symbolic user interface for the effortless construction of a hybrid of
 hierarchical and categorical linking between plots. The
 \texttt{plotly\_key\_tree()} function, in turn, decodes the hierarchical
 specification to plot a tree for data overview and navigation, when
@@ -361,7 +361,7 @@ accompanied by more detailed plots.
 \hypertarget{slicing-and-dicing-time}{%
 \subsection{Slicing and dicing time}\label{slicing-and-dicing-time}}
 
-An important aspect of temporal data is the time context. Time has
+An important aspect of temporal data is the time context. Time has a
 cyclical structure, that may correspond to seasonal patterns to be
 discovered. The \texttt{index} component of the (shared) tsibble data
 forms the basis for exploring seasonality. To investigate for periodic
@@ -381,22 +381,22 @@ explore this with pedestrian traffic in Melbourne, Australia.
 \end{Schunk}
 
 The city of Melbourne has sensors installed at various locations, to
-record hourly counts of pedestrians, in order to capture daily rhythms
-of the downtown \citep{ped}. Figure \ref{fig:wrap-ped} shows the first
-five months of 2020 foot traffic at four different locations, for three
-different time slices, daily, weekly and full five months. Plot
+record hourly counts of pedestrians, in order to capture the daily
+rhythms of the downtown \citep{ped}. Figure \ref{fig:wrap-ped} shows the
+first five months of 2020 foot traffic at four different locations, for
+three different time slices, daily, weekly and full five months. Plot
 \ref{fig:wrap-ped-1} shows hourly counts from January to May on an
-absolute time line, facetted by locations. The stage 3 COVID-19
-lockdown, on March 16, is marked by a change of colour. (The
-pre-lockdown period is coloured with dark green and lockdown with
-orange.) We can see a significant decline in foot traffic at all four
-locations. QV Market is less affected probably because this is a major
-produce market, an essential service that continued to operate. Bourke
-St, a major shopping center, sees a gradual uptick in the last weeks of
-the period indicating that people were getting back into the shops.
+absolute timeline, facetted by locations. The stage 3 COVID-19 lockdown,
+on March 16, is marked by a change of color. (The pre-lockdown period is
+colored with dark green and lockdown with orange.) We can see a
+significant decline in foot traffic at all four locations. QV Market is
+less affected probably because this is a major produce market, an
+essential service that continued to operate. Bourke St, a major shopping
+center, sees a gradual uptick in the last weeks of the period indicating
+that people were getting back into the shops.
 
-Figure \ref{fig:wrap-ped-2} and \ref{fig:wrap-ped-3} show slicing and
-wrapping of the series into daily and weekly sections, respectively.
+Figure \ref{fig:wrap-ped-2} and \ref{fig:wrap-ped-3} show the slicing
+and wrapping of the series into daily and weekly sections, respectively.
 Multiple seasonalities pop out. There tends to be a daily pattern,
 especially visible at the main train station, Southern Cross Station.
 There is also a weekday vs weekend pattern, also most visible at
@@ -404,7 +404,7 @@ Southern Cross Station. These seasonal patterns are still present during
 the lockdown, but the magnitude is greatly reduced. Numbers are also
 down at the produce market and the shopping center. Birrarung Marr is
 the most affected. This is the location of special events, and it is
-clear that these have completely disappeared during lockdown.
+clear that these have completely disappeared during the lockdown.
 
 The wrapping procedure involves slicing the time index into seasonal
 periods of interest, and the result is diced time. For example, hourly
@@ -462,9 +462,9 @@ shinyApp(ui, server)
 
 Figure \ref{fig:wrap-ped-1} corresponds to the initial state, with the
 slider incremented by 1-day units. The ``play'' button near the end of
-slider can automatically animate the slicing and dicing process, walking
-the viewer through all 24 hours of the 152 days. Alternatively, users
-can drag the slider to examine selected slices.
+the slider can automatically animate the slicing and dicing process,
+walking the viewer through all 24 hours of the 152 days. Alternatively,
+users can drag the slider to examine selected slices.
 
 In response to the slider input, the plot will be updated and loaded
 with newly transformed data. At its core, keeping the application as
@@ -478,8 +478,8 @@ cached and used as is.
 
 The new shiny module exploits the temporal aspect for a tsibble object,
 available through the \texttt{index} attribute. It allows users to slide
-through relative periods to digest seasonal behaviours, with nimble user
-experience.
+through relative periods to digest seasonal behaviors, with a nimble
+user experience.
 
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
@@ -492,8 +492,8 @@ The \texttt{as\_shared\_tsibble()} turns a \texttt{tsibble} object to a
 shared data class, with an option to express any nesting and crossing
 structures from the \texttt{key} attribute. If nesting is found in the
 data, the \texttt{plotly\_key\_tree()} creates an interactive
-hierarchical tree to help with data overview. This sets the stage for
-hierarchical and categorical linking between multiple views from one
+hierarchical tree to help with the data overview. This sets the stage
+for hierarchical and categorical linking between multiple views from one
 shared tsibble.
 
 A new shiny module, \texttt{tsibbleWrapUI()} and
@@ -513,7 +513,7 @@ Department of Statistics\\
 %
 %
 %
-\\\href{mailto:earo.wang@auckland.ac.nz}{\nolinkurl{earo.wang@auckland.ac.nz}}
+\href{mailto:earo.wang@auckland.ac.nz}{\nolinkurl{earo.wang@auckland.ac.nz}}%
 }
 
 \address{%
@@ -523,5 +523,5 @@ Department of Econometrics and Business Statistics\\
 %
 %
 %
-\\\href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}
+\href{mailto:dicook@monash.edu}{\nolinkurl{dicook@monash.edu}}%
 }
