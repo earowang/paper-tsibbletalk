@@ -35,12 +35,15 @@ opts_chunk$set(
   out.width = ifelse(is_html_output(), "100%", "\\textwidth")
 )
 opts_knit$set(root.dir = here::here())
+```
+
+```{r external}
 read_chunk("scripts/demo.R")
 read_chunk("scripts/tourism.R")
 read_chunk("scripts/pedestrian.R")
 ```
 
-```{r, load-pkgs}
+```{r load-pkgs}
 ```
 
 # Introduction
