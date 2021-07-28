@@ -1,7 +1,7 @@
 ## ---- tourism-shared
 library(tsibble)
 library(tsibbletalk)
-tourism_shared <- tourism_monthly %>% 
+tourism_shared <- tourism_monthly %>%
   as_shared_tsibble(spec = (State / Region) * Purpose)
 
 ## ---- plotly-key-tree
@@ -27,8 +27,8 @@ p_br <- tourism_feat %>%
 library(plotly)
 subplot(p_l,
   subplot(
-    ggplotly(p_tr, tooltip = "Region", width = 1100),
-    ggplotly(p_br, tooltip = "Region", width = 1100),
+    ggplotly(p_tr, tooltip = "Region", width = 700, height = 800),
+    ggplotly(p_br, tooltip = "Region", width = 700, height = 800),
     nrows = 2),
   widths = c(.4, .6)) %>%
   highlight(dynamic = TRUE)
