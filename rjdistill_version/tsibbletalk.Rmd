@@ -115,7 +115,7 @@ These line plots are heavily overplotted. To tease apart structure in the multip
 
 There is one final step, to compose the three plots into an ensemble of coordinated views for exploration, shown in Figure \@ref(fig:tourism-multi).  (This is the interactive realization of Figure \@ref(fig:highlight-retail)). <!-- Routine functions bring about new interaction with temporal data on the client side.-->
 
-```{r tourism-multi, echo = TRUE, eval = knitr::is_html_output(), fig.cap = "Exploring an ensemble of linked plots of the Australian tourism data, built on a \\code{tourism\\_shared} object. Click one of the nodes in the hierarchical tree to enable persistent linked brushing to compare two groups. Points and lines can also be selected in other plots. (Only Western Australia and Tasmania are included for the interactive plot in the html version, so size reasons.)"}
+```{r tourism-multi, layout="l-body-outset", echo = TRUE, eval = knitr::is_html_output(), fig.cap = "Exploring an ensemble of linked plots of the Australian tourism data, built on a \\code{tourism\\_shared} object. Click one of the nodes in the hierarchical tree to enable persistent linked brushing to compare two groups. Points and lines can also be selected in other plots. (Only Western Australia and Tasmania are included for the interactive plot in the html version, so size reasons.)"}
 ```
 
 Since all plots are created from one shared tsibble data source, they are self-linking views. Nodes, lines, and points are hoverable and clickable. Given the `spec`, clicking either one element in any plot highlights all points that match the `Region` category, that is, categorical linking. Figure \@ref(fig:tourism-multi) provides an interactive exploration. The steps in getting to this point were:
